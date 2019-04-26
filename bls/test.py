@@ -10,8 +10,13 @@ def runTestCode():
     # data = json.dumps({"seriesid": ['OEUN000000011100011000001'], "startyear": "2018", "endyear": "2018"})
     # p = requests.post('https://api.bls.gov/publicAPI/v2/timeseries/data/', data=data, headers=headers)
 
-    data = json.dumps({"seriesid": ['OEUN000000011100011000001']})
+    data = json.dumps({"seriesid": ['OEUN000000000000015113201'],
+                       "registrationKey": "b864acac3e794adc9effc291c6ab8506",
+                       "startyear": "2018", "endyear": "2018"
+                       })
     p = requests.post('https://api.bls.gov/publicAPI/v2/timeseries/data/', data=data, headers=headers)
+
+    #b864acac3e794adc9effc291c6ab8506
 
     json_data = json.loads(p.text)
 
