@@ -1,0 +1,4 @@
+{"status":"REQUEST_SUCCEEDED","responseTime":141,"message":["Series does not exist for Series OEUN000000011100011000001"],"Results":{
+"series":
+[{"seriesID":"OEUN000000011100011000001","data":[]}]
+}}
