@@ -1,4 +1,4 @@
-{"status":"REQUEST_SUCCEEDED","responseTime":134,"message":[],"Results":{
+{"status":"REQUEST_SUCCEEDED","responseTime":188,"message":[],"Results":{
 "series":
-[{"seriesID":"OEUN000000000000015113201","data":[{"year":"2018","period":"A01","periodName":"Annual","latest":"true","value":"903160","footnotes":[{}]}]}]
+[{"seriesID":"OEUN000000054150015113201","data":[{"year":"2018","period":"A01","periodName":"Annual","latest":"true","value":"320220","footnotes":[{}]}]}]
 }}
