@@ -3,10 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Mark up</title>
-    <link rel="stylesheet" href="/staticstyles/main.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/styles/main.css" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body>
     <h1>Mark up here...</h1>
+
+    <script>
+        $(document).ready(function(){
+            //$("#test").text("abc");
+            $("#button").click(function () {
+                $("#test").toggle()
+
+            });
+        });
+    </script>
+
+    <button id="button">Click</button><br/><br/>
+
+    <div id = "test">ABC</div>
+
+    <br/><br/><br/>
+
+    <div>Drop down Test</div>
+
+
 
 </body>
 </html>
