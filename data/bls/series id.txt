@@ -1,0 +1,38 @@
+prefix  -  EE
+seasonal - S
+industry - 807371
+data type - 01
+
+
+OEUN000000011100011000001
+
+
+
+Positions       Value           Field Name
+	1-2             OE              Prefix
+	3               U               Seasonal Adjustment Code
+	4               N               Area Type Code
+	5-11            0000000         Area Code
+	12-17           111000          Industry Code
+	18-23           110000          Occupation Code
+	24-25           01              Data Type Code
+
+
+
+OE
+U
+N
+0000000
+541500
+151132
+01
+
+
+OEUN000000054150015113201
+
+OEUN000000000000015113201
+
+151132	
+
+
+'{"seriesid": ["OEUN0000000000000015113201"], "registrationKey":["b864acac3e794adc9effc291c6ab8506"]}'

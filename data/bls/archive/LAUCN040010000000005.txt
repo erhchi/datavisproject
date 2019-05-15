@@ -1,0 +1,30 @@
++----------------------+------+--------+-------+--------------------------------------------------+
+|      series id       | year | period | value |                    footnotes                     |
++----------------------+------+--------+-------+--------------------------------------------------+
+| LAUCN040010000000005 | 2019 |  M02   | 18752 |                   Preliminary.                   |
+| LAUCN040010000000005 | 2019 |  M01   | 18737 |                                                  |
+| LAUCN040010000000005 | 2018 |  M12   | 18711 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2018 |  M11   | 18680 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2018 |  M10   | 18714 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2018 |  M09   | 18943 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2018 |  M08   | 18865 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2018 |  M07   | 18026 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2018 |  M06   | 18736 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2018 |  M05   | 18442 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2018 |  M04   | 18417 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2018 |  M03   | 18592 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2018 |  M02   | 18457 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2018 |  M01   | 18431 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M12   | 18325 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M11   | 18331 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M10   | 18525 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M09   | 18613 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M08   | 18416 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M07   | 17523 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M06   | 18140 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M05   | 18275 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M04   | 18333 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M03   | 18708 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M02   | 18210 | Data were subject to revision on April 19, 2019. |
+| LAUCN040010000000005 | 2017 |  M01   | 18223 | Data were subject to revision on April 19, 2019. |
++----------------------+------+--------+-------+--------------------------------------------------+

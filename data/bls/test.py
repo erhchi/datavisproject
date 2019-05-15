@@ -5,9 +5,26 @@ import json
 def runTestCode():
 
     headers = {'Content-type': 'application/json'}
-    data = json.dumps({"seriesid": ['CUUR0000SA0','SUUR0000SA0'],"startyear":"2011", "endyear":"2012"})
+    #data = json.dumps({"seriesid": ['CEU0800000003'],"startyear":"2017", "endyear":"2018"})
+
+    # data = json.dumps({"seriesid": ['OEUN000000011100011000001'], "startyear": "2018", "endyear": "2018"})
+    # p = requests.post('https://api.bls.gov/publicAPI/v2/timeseries/data/', data=data, headers=headers)
+
+    data = json.dumps({"seriesid": ['OEUN000000054150015113201'],
+                       "registrationKey": "b864acac3e794adc9effc291c6ab8506",
+                       "startyear": "2018", "endyear": "2018"
+                       })
     p = requests.post('https://api.bls.gov/publicAPI/v2/timeseries/data/', data=data, headers=headers)
+
+    #b864acac3e794adc9effc291c6ab8506
+
     json_data = json.loads(p.text)
+
+    print(p.text)
+
+    output = open("data.txt", "w")
+    output.write(p.text)
+    output.close()
 
     for series in json_data['Results']['series']:
 
