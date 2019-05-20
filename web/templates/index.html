@@ -4,10 +4,43 @@
     <meta charset="UTF-8">
     <title>The Fork Bombers</title>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css')}}" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body>
     <a href="/">The Fork Bombers</a><br/>
-    <a href="{{ url_for('static', filename='markup.html') }}">Markup</a>
+{#    <a href="{{ url_for('static', filename='markup.html') }}">Markup</a>#}
+
+    <br/>
+    {{ concentrations }}
+    <br/>
+    <ul>
+        {%  for item in concentrations %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+
+    <br/>
+    <br/>
+
+    <form action="{{ url_for('concentration') }}" method="post">
+    <select name="concentration">
+        {%  for item in concentrations %}
+        <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Submit" />
+    </form>
+    <br/>
+    <br/>
+
+    <form action="{{ url_for('courses') }}" method="post">
+    <select multiple name="courses">
+        {% for item in courses %}
+            <option value="{{ item}}">{{ item }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Submit"/>
+    </form>
 
 </body>
 </html>

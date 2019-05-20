@@ -31,7 +31,16 @@ def single_course_to_job(k):
     print('Recommend job:')
     for i in sim:
         print('    {} - {}'.format(j_df.iloc[i,0],j_df.iloc[i,1]))
-    
+
+
+def get_concentrations():
+    print('\nConcentration: ')
+    concentr = c_df.level.unique()
+    return concentr
+
+
+
+
 def single_job_to_course():
     pass
 def multi_course_to_job():
