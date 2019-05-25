@@ -5,29 +5,218 @@
     <title>Mark up</title>
     <link rel="stylesheet" href="/static/styles/main.css" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="conc.csv.js"></script>
+	<script src="courses.csv.js"></script>
 </head>
 <body>
-    <h1>Mark up here...</h1>
+	<!-- 
+		TODO:	
+			- Much formatting.  Make it look pretty.
+			- Move all css styles to css file.
+			- Change select course menu from drop down to draggable list?
+	-->
+	<script> 
+		// -------------------------
+		// Selected Class List 
+		// Drag Event Handlers
+		// -------------------------
 
-    <script>
-        $(document).ready(function(){
-            //$("#test").text("abc");
-            $("#button").click(function () {
-                $("#test").toggle()
+		// Sets data of dragged object
+		function dragBeginHandler(ev)
+		{
+			console.log(ev.target);
+			ev.dataTransfer.setData("text", ev.target);
+		}
 
-            });
-        });
-    </script>
+		// Fires when drag event ends.
+		function dragEndHandler(ev)
+		{
+			// If dropped back in pool, do nothing.
+			if (ev.dataTransfer.dropEffect != "none")
+			{
+				console.log("Abort End");
+			}
+			// Otherwise remove from course pool and selected display.
+			else
+			{
+				console.log("End");
 
-    <button id="button">Click</button><br/><br/>
+				// Remove from pool
+				for (var i = 0; i < selectedCoursePool.length; ++i)
+				{
+					if (selectedCoursePool[i] == ev.target.value)
+					{
+						selectedCoursePool.splice(i, 1);
 
-    <div id = "test">ABC</div>
+					}
+				}
 
-    <br/><br/><br/>
+				console.log(selectedCoursePool);
 
-    <div>Drop down Test</div>
+				var list = $("#list");
+				//console.log(list[0].childNodes);
+				var listElements = list[0].childNodes;
+				for (var i = 0; i < listElements.length; ++i)
+				{
+					if (listElements[i].value == ev.target.value)
+					{
+						list[0].removeChild(listElements[i]);
+					}
+				}
+			}
+		}
+
+		// Needed to designate an element as a drop zone.
+		function dragover_handler(ev) 
+		{
+			 ev.preventDefault();
+			 // Set the dropEffect to move
+			 console.log("drag over");
+		}
+
+		// Fires if dragged element is dropped back in course pool.
+		function drop_handler(ev) 
+		{
+			 ev.preventDefault();
+			 ev.dataTransfer.dropEffect = "none";
+			 console.log("drop");
+			 console.log(ev.dataTransfer.dropEffect)
+		}
+
+		// --------------------
+		// Data Methods
+		// --------------------
+
+		function LogConcChange()
+		{
+			console.log( $("#concDrop")[0].value );
+		}
+		
+		function LoadConcentrations(data)
+		{
+			d3.select("#concDrop")
+			.selectAll("option")
+			.data(concData).enter()
+			.append("option")
+			.attr("value", function(d) { return d.concentration; })
+			.text(function(d) { return d.concentration; });
+		}
+
+		function LoadConcentrationCourses(data)
+		{
+			var drop = d3.select("#courseDrop");
+			drop.selectAll("option").remove();
+		
+			var selectedConcentration = $("#concDrop")[0].value;
+			
+			var selectedData = [];
+			for (var i = 0; i < data.length; ++i)
+			{
+				if (data[i].level == selectedConcentration)
+				
+					selectedData.push(data[i]);
+			}
+			
+			d3.select("#courseDrop")
+				.selectAll("empty")
+				.data(selectedData)
+				.enter()
+				.append("option")
+				.attr("value", function(d) { return d.index; } )
+				.attr("draggable", "true")
+				.text( function(d) { return d.dept + d.cno + " - " + d.name; } );
+
+		}
+
+		function ContainsCourse(courseIndex)
+		{
+			return selectedCoursePool.filter(i => i == courseIndex).length != 0;
+		}
+		
+		function AddCourseToPool(courseData)
+		{
+			var courseIndex = +$("#courseDrop")[0].value;
+
+			console.log(courseData[courseIndex]);
+
+			var flag = !ContainsCourse(courseIndex)
+			console.log(flag);
+			if (flag)
+			{
+				d3.select("#list").append("li")
+					.attr("value", courseIndex)
+					.attr("draggable", "true")
+					.attr("ondragstart", "dragBeginHandler(event)")
+					.text(courseData[courseIndex].dept + courseData[courseIndex].cno + " - " + courseData[courseIndex].name)
+					.style("font-family", "sans-serif");
+
+				selectedCoursePool.push(courseIndex);
+			}
+			else
+			{
+				console.log("Course already selected.");
+			}
+
+			
+			console.log(selectedCoursePool);
+		}
+		
+		function ClearSelections()
+		{
+			while(selectedCoursePool.length) 
+			{ 
+				selectedCoursePool.pop(); 
+			}
+			d3.select("#list").selectAll("li").remove();
+			console.log(selectedCoursePool);
+		}
+	</script>
 
 
+	<div id="SelectMenus">
+		<!-- Concentration Menu -->
+		<div style="float: left; margin-right: 50px">
+			<h2 style="font-family:sans-serif"/>Select Concentration</h1>
 
+			<div id="concentrationSelect" onchange="LoadConcentrationCourses(courseData)">
+				<select id="concDrop"></select>
+			</div>
+		</div>
+
+		<!-- Select Course Menu -->
+		<div style="float: left; margin-right: 50px">
+			<h2 style="font-family:sans-serif"/>Select Course</h2>
+
+			<div id="courseSelect" onchange="AddCourseToPool(courseData)">
+				<select id="courseDrop"></select>
+			</div>
+		</div>
+
+		<!-- Selected Course Display -->
+		<div id="SelectedDisplay" style="float: left; margin-right: 50px">
+			<h2 style="font-family:sans-serif">Selected Courses</h2>
+
+			<ul id="list" style="width: 300px; height: 300px; border: 2px solid black; list-style-type: none;" 
+			ondragend="dragEndHandler(event)" ondrop="drop_handler(event)" ondragover="dragover_handler(event)"></ul>
+
+			<!-- Clear Selected Pool Button -->
+			<button id="clearSelectionButton" onclick="ClearSelections(selectedCoursePool)">Clear</button>
+		</div>	
+	</div>
+
+	<!-- MAIN SCRIPT -->
+	<script>
+		// Load data.
+		var concData = d3.csvParse(conc_data);
+		var courseData = d3.csvParse(course_data, function(d, i) { d.index = i; return d;});
+
+		// Initial menu loads
+		LoadConcentrations(concData);
+		LoadConcentrationCourses(courseData);
+		
+		// Global pool.
+		selectedCoursePool = [];
+	</script>
 </body>
 </html>
