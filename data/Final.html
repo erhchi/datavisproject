@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title> CSC595 Final </title>
+</head>
+<body>
+    <!--<h1>  CSC595  Final </h1>
+    <h2>  DePaul MS-CS Elective Courses  </h2>
+    <text><br><br></text>-->
+    <h2> Academic Status & Prospective Career </h2>
+    <svg id="d3_academic" width="700" height="500"></svg>
+    
+    <svg id="d3_career" width="700" height="500"></svg>
+    <h2> Career Path</h2>
+    <svg id="d3_path" width="1500" height="1000"></svg>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+
+    <!-- Load data -->
+    <script src="courses.csv.js"></script>
+    <script src="jobs.csv.js"></script>
+
+
+    <script src="index_by_sim.js"></script>
+
+    
+
+    <!-- Load plot fuctions -->
+    <script src="rose_plot.js"></script>
+    <script src="tree_path.js"></script>
+    <script src="radar_plot.js"></script>
+
+    <script>
+        // var json = './index_by_sim.js';
+        // require([json], function(Module){ console.log(Module); })
+        // var json = require(['./index_by_sim.js']); //(with path)
+
+
+        // Eight selected courses
+        var selected_course = course_idx;
+        
+        // not connect to python yet need ajax and flask
+        var call_python_function = function(course_idx) { return job_idx };
+
+        
+        var output_job_idx = call_python_function(selected_course)
+        
+
+        var svg_academic = d3.select("#d3_academic"),
+            svg_career = d3.select("#d3_career"),
+            svg_path = d3.select("#d3_path");
+
+        // get full course and full job data
+        var course_data = d3.csvParse(courses),
+            job_data = d3.csvParse(jobs);
+        
+        var Radar = radar_Vis(),
+            Rose = RP_Vis(),
+            Tree = TP_Vis();
+
+
+        var config = {w: 400,
+                      h: 400,
+                      maxValue: 8,
+                      levels: 8}
+
+        Radar.radar_plot(svg_academic, get_academic_data(selected_course), config);
+        Rose.rose_plot(svg_career, get_career_data(output_job_idx), d3.schemeCategory20);
+        
+        var has_path ="false";
+        var sub_data = [];
+        Rose.dispatch.on("selected",
+                        function(selectedVar){ has_path = "ture";
+                                               sub_data = get_path_data(output_job_idx, selectedVar)
+                                               Tree.tree_path(svg_path, sub_data )});
+
+
+        Radar.dispatch.on("selected1",
+                        function(selectedVar){ 
+                            if (has_path=='ture') {
+                                console.log('run!');
+                                Tree.tree_path(svg_path, get_saturation(sub_data, selectedVar[0]), selectedVar[1])
+                            } else {
+                                console.log('no tree plot yet.');
+                            } 
+                        });
+
+
+    </script>
+</body>
+</html>
