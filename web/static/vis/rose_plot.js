@@ -82,9 +82,6 @@ var RP_Vis = function() {
 }
 
 var get_career_data = function(job_idx) {
-
-    console.log("job_idx",job_idx)
-
     var titles = new Set()
   
     for (j = 0; j < job_data.length; j++){

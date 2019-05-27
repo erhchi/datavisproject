@@ -358,7 +358,7 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 		{
 			var courseIndex = +$("#courseDrop")[0].value;
 
-			console.log(courseData[courseIndex]);
+			//console.log(courseData[courseIndex]);
 
 			var flag = !ContainsCourse(courseIndex)
 			console.log(flag);
@@ -405,13 +405,12 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 				contentType: "application/json; charset=utf-8",
 				success: function(d)
 				{
-					console.log(d);
+					//console.log(d);
 					selectedCoursePool = d.course_idx
 					jobId = d.job_idx
 					jobIdByGroups = d.job_idx_by_groups
 
                     output_job_idx = d.job_idx
-                    console.log("output_job_idx", output_job_idx)
 
 					drawVis();
 				}
@@ -474,14 +473,10 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
                 svg_career = d3.select("#d3_career"),
                 svg_path = d3.select("#d3_path");
 
-
-            //console.log(jobs)
-
             // get full course and full job data
             course_data = d3.csvParse(courses),
                 job_data = d3.csvParse(jobs);
 
-            console.log("job_data", job_data)
 
             var Radar = radar_Vis(),
                 Rose = RP_Vis(),
@@ -495,7 +490,6 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
                 levels: 8
             }
 
-            console.log("output_job_idx", output_job_idx)
 
             Radar.radar_plot(svg_academic, get_academic_data(selected_course), config);
             Rose.rose_plot(svg_career, get_career_data(output_job_idx), d3.schemeCategory20);
