@@ -1,68 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>The Fork Bombers</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css')}}" type="text/css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
-    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
-
-</head>
-<body>
-
-    <a href="/">The Fork Bombers</a><br/>
-
-        	<div id="SelectMenus">
-		<!-- Concentration Menu -->
-		<div style="float: left; margin-right: 50px">
-			<h2 style="font-family:sans-serif"/>Select Concentration</h1>
-
-			<div id="concentrationSelect" onchange="LoadConcentrationCourses(courseData)">
-				<select id="concDrop"></select>
-			</div>
-		</div>
-
-                <form action="{{ url_for('selection') }}" method="post">
-                    <input type="hidden" name="hack" value="[1]"/>
-		<!-- Select Course Menu -->
-		<div style="float: left; margin-right: 50px">
-			<h2 style="font-family:sans-serif"/>Select Course</h2>
-
-			<div id="courseSelect" onchange="AddCourseToPool(courseData)">
-
-				<select id="courseDrop"></select>
-			</div>
-		</div>
-
-		<!-- Selected Course Display -->
-		<div id="SelectedDisplay" style="float: left; margin-right: 50px">
-			<h2 style="font-family:sans-serif">Selected Courses</h2>
-
-
-			<select multiple  id="list" name="coursesX" style="width: 300px; height: 300px; border: 2px solid black; list-style-type: none;"
-			ondragend="dragEndHandler(event)" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
-{#<option value="5" draggable="true" ondragstart="dragBeginHandler(event)" style="font-family: sans-serif;">XXXCSC482 - Applied Image Analysis</option>#}
-</select>
-			<!-- Clear Selected Pool Button -->
-            <input type="submit" value="Submit"/>
-			<button id="clearSelectionButton" onclick="ClearSelections(selectedCoursePool)">Clear</button>
-		</div>
-                    </form>
-	</div>
-
-
-
-
-{#<script src="{{ url_for('static', filename='data/conc.csv.js')}}" type="javascript"></script>#}
-{#    <script src="{{ url_for('static', filename='data/courses.csv.js')}}" type="javascript"></script>#}
-{#<script src="{{ url_for('static', filename='mikes.js')}}" type="javascript"></script>#}
-{##}
-
-    <script>
-        var conc_data = `concentration
+var conc_data = `concentration
 Artificial Intelligence
 Data Science
 Database Systems
@@ -72,7 +8,7 @@ Software Engineering
 Game and Real-Time Systems
 Software and Systems Development`
 
-var course_data = `level,dept,cno,name,description,prerequisite
+var courses = `level,dept,cno,name,description,prerequisite
 Artificial Intelligence,CSC,457,Expert Systems,A study of the development of expert systems. Students will use commercial packages to develop standalone and embedded expert systems. Topics will include rule-based systems decision trees forward and backward chaining inference reasoning with uncertainty and intelligent agents.,CSC403
 Artificial Intelligence,CSC,458,Symbolic Programming,Concepts of symbolic programming as embodied in the language LISP. Basic data and control structures of LISP: symbolic expressions the interpreter functions recursion iteration. Techniques for prototyping and building conceptually advanced systems in an environment that encourages procedural and data abstraction. Advanced topics may include Prolog intelligent tutoring systems intelligent agents and natural language processing. Assignments will focus on basic AI techniques but the class is intended for anyone who will need to rapidly develop large complex systems.,CSC403
 Artificial Intelligence,DSC,478,Programming Machine Learning Applications,The course will focus on the implementations of various data mining and machine learning techniques using a high-level programming language. Students will have hands on experience developing both supervised and unsupervised machine learning algorithms and will learn how to employ these techniques in the context of popular applications including automatic personalization recommender systems searching and ranking text mining group and community discovery and social media analytics.,DSC441-CSC401
@@ -316,16 +252,12 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 
 		function LoadConcentrations(data)
 		{
-		    console.log(data)
-
-            console.log(d3.select("#concDrop").empty())
-
 			d3.select("#concDrop")
 			.selectAll("option")
 			.data(concData).enter()
 			.append("option")
-			.attr("value", function(d) {  return d.concentration; })
-			.text(function(d, i) { return d.concentration; });
+			.attr("value", function(d) { return d.concentration; })
+			.text(function(d) { return d.concentration; });
 		}
 
 		function LoadConcentrationCourses(data)
@@ -369,9 +301,8 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 			console.log(flag);
 			if (flag)
 			{
-				d3.select("#list").append("option")
+				d3.select("#list").append("li")
 					.attr("value", courseIndex)
-                    .attr('selected', "true")
 					.attr("draggable", "true")
 					.attr("ondragstart", "dragBeginHandler(event)")
 					.text(courseData[courseIndex].dept + courseData[courseIndex].cno + " - " + courseData[courseIndex].name)
@@ -398,13 +329,9 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 			console.log(selectedCoursePool);
 		}
 
-		console.log(conc_data)
 
 		// Load data.
 		var concData = d3.csvParse(conc_data);
-
-        console.log(concData)
-
 		var courseData = d3.csvParse(course_data, function(d, i) { d.index = i; return d;});
 
 		// Initial menu loads
@@ -413,90 +340,3 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 
 		// Global pool.
 		selectedCoursePool = [];
-
-        //var fromServer =
-        //console.log(fromServer);
-    </script>
-
-
-
-
-
-
-
-<h2> Academic Status & Prospective Career </h2>
-    <svg id="d3_academic" width="700" height="500"></svg>
-
-    <svg id="d3_career" width="700" height="500"></svg>
-    <h2> Career Path</h2>
-    <svg id="d3_path" width="1500" height="1000"></svg>
-
-
-    <!-- Load data -->
-    <script src="{{ url_for('static',filename='data/courses.csv.js')}}"></script>
-    <script src="{{ url_for('static',filename='data/jobs.csv.js')}}"></script>
-
-    <script src="{{ url_for('static',filename='data/index_by_sim.js')}}"></script>
-
-    <!-- Load plot fuctions -->
-
-    <script src="{{ url_for('static',filename='data/rose_plot.js')}}"></script>
-    <script src="{{ url_for('static',filename='data/tree_path.js')}}"></script>
-    <script src="{{ url_for('static',filename='data/radar_plot.js')}}"></script>
-
-    <script>
-
-        // Eight selected courses
-        var selected_course = course_idx;
-
-        // not connect to python yet need ajax and flask
-        var call_python_function = function(course_idx) { return job_idx };
-
-
-        var output_job_idx = call_python_function(selected_course)
-
-
-        var svg_academic = d3.select("#d3_academic"),
-            svg_career = d3.select("#d3_career"),
-            svg_path = d3.select("#d3_path");
-
-        // get full course and full job data
-        var course_data = d3.csvParse(courses),
-            job_data = d3.csvParse(jobs);
-
-        var Radar = radar_Vis(),
-            Rose = RP_Vis(),
-            Tree = TP_Vis();
-
-
-        var config = {w: 400,
-                      h: 400,
-                      maxValue: 8,
-                      levels: 8}
-
-        Radar.radar_plot(svg_academic, get_academic_data(selected_course), config);
-        Rose.rose_plot(svg_career, get_career_data(output_job_idx), d3.schemeCategory20);
-
-        var has_path ="false";
-        var sub_data = [];
-        Rose.dispatch.on("selected",
-                        function(selectedVar){ has_path = "ture";
-                                               sub_data = get_path_data(output_job_idx, selectedVar)
-                                               Tree.tree_path(svg_path, sub_data )});
-
-
-        Radar.dispatch.on("selected1",
-                        function(selectedVar){
-                            if (has_path=='ture') {
-                                console.log('run!');
-                                Tree.tree_path(svg_path, get_saturation(sub_data, selectedVar[0]), selectedVar[1])
-                            } else {
-                                console.log('no tree plot yet.');
-                            }
-                        });
-
-
-    </script>
-
-</body>
-</html>
