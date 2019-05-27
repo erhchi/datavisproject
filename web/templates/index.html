@@ -25,8 +25,6 @@
 			</div>
 		</div>
 
-                <form action="{{ url_for('selection') }}" method="post">
-                    <input type="hidden" name="hack" value="[1]"/>
 		<!-- Select Course Menu -->
 		<div style="float: left; margin-right: 50px">
 			<h2 style="font-family:sans-serif"/>Select Course</h2>
@@ -41,16 +39,12 @@
 		<div id="SelectedDisplay" style="float: left; margin-right: 50px">
 			<h2 style="font-family:sans-serif">Selected Courses</h2>
 
+			<ul id="list" style="width: 300px; height: 300px; border: 2px solid black; list-style-type: none;"
+			ondragend="dragEndHandler(event)" ondrop="drop_handler(event)" ondragover="dragover_handler(event)"></ul>
 
-			<select multiple  id="list" name="coursesX" style="width: 300px; height: 300px; border: 2px solid black; list-style-type: none;"
-			ondragend="dragEndHandler(event)" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
-{#<option value="5" draggable="true" ondragstart="dragBeginHandler(event)" style="font-family: sans-serif;">XXXCSC482 - Applied Image Analysis</option>#}
-</select>
 			<!-- Clear Selected Pool Button -->
-            <input type="submit" value="Submit"/>
 			<button id="clearSelectionButton" onclick="ClearSelections(selectedCoursePool)">Clear</button>
 		</div>
-                    </form>
 	</div>
 
 
@@ -285,6 +279,8 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 						list[0].removeChild(listElements[i]);
 					}
 				}
+
+				SendPool();
 			}
 		}
 
@@ -316,9 +312,8 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 
 		function LoadConcentrations(data)
 		{
-		    console.log(data)
-
-            console.log(d3.select("#concDrop").empty())
+		    //console.log(data)
+            //console.log(d3.select("#concDrop").empty())
 
 			d3.select("#concDrop")
 			.selectAll("option")
@@ -378,6 +373,8 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 					.style("font-family", "sans-serif");
 
 				selectedCoursePool.push(courseIndex);
+
+				SendPool();
 			}
 			else
 			{
@@ -398,13 +395,31 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 			console.log(selectedCoursePool);
 		}
 
-		console.log(conc_data)
+		function SendPool()
+		{
+			//console.log(JSON.stringify(selectedCoursePool));
+			var a = $.ajax({
+				url: "/selection",
+				type: "POST",
+				data: JSON.stringify({ a: selectedCoursePool }),
+				contentType: "application/json; charset=utf-8",
+				success: function(d)
+				{
+					console.log(d);
+					selectedCoursePool = d.course_idx
+					jobId = d.job_idx
+					jobIdByGroups = d.job_idx_by_groups
+
+                    output_job_idx = d.job_idx
+                    console.log("output_job_idx", output_job_idx)
+
+					drawVis();
+				}
+			})
+		}
 
 		// Load data.
 		var concData = d3.csvParse(conc_data);
-
-        console.log(concData)
-
 		var courseData = d3.csvParse(course_data, function(d, i) { d.index = i; return d;});
 
 		// Initial menu loads
@@ -413,14 +428,10 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 
 		// Global pool.
 		selectedCoursePool = [];
-
-        //var fromServer =
-        //console.log(fromServer);
+        output_job_idx = [];
+        jobId = []
+		jobIdByGroups = []
     </script>
-
-
-
-
 
 
 
@@ -440,62 +451,76 @@ Software and Systems Development,TDC,568,Network Management,The five major areas
 
     <!-- Load plot fuctions -->
 
-    <script src="{{ url_for('static',filename='data/rose_plot.js')}}"></script>
-    <script src="{{ url_for('static',filename='data/tree_path.js')}}"></script>
-    <script src="{{ url_for('static',filename='data/radar_plot.js')}}"></script>
+    <script src="{{ url_for('static',filename='vis/rose_plot.js')}}"></script>
+    <script src="{{ url_for('static',filename='vis/tree_path.js')}}"></script>
+    <script src="{{ url_for('static',filename='vis/radar_plot.js')}}"></script>
 
     <script>
 
-        // Eight selected courses
-        var selected_course = course_idx;
+        function drawVis() {
+            // Eight selected courses
+            selected_course = selectedCoursePool;
 
-        // not connect to python yet need ajax and flask
-        var call_python_function = function(course_idx) { return job_idx };
-
-
-        var output_job_idx = call_python_function(selected_course)
-
-
-        var svg_academic = d3.select("#d3_academic"),
-            svg_career = d3.select("#d3_career"),
-            svg_path = d3.select("#d3_path");
-
-        // get full course and full job data
-        var course_data = d3.csvParse(courses),
-            job_data = d3.csvParse(jobs);
-
-        var Radar = radar_Vis(),
-            Rose = RP_Vis(),
-            Tree = TP_Vis();
+            // not connect to python yet need ajax and flask
+            var call_python_function = function (course_idx) {
+                return job_idx
+            };
 
 
-        var config = {w: 400,
-                      h: 400,
-                      maxValue: 8,
-                      levels: 8}
-
-        Radar.radar_plot(svg_academic, get_academic_data(selected_course), config);
-        Rose.rose_plot(svg_career, get_career_data(output_job_idx), d3.schemeCategory20);
-
-        var has_path ="false";
-        var sub_data = [];
-        Rose.dispatch.on("selected",
-                        function(selectedVar){ has_path = "ture";
-                                               sub_data = get_path_data(output_job_idx, selectedVar)
-                                               Tree.tree_path(svg_path, sub_data )});
+            //var output_job_idx = call_python_function(selected_course)
 
 
-        Radar.dispatch.on("selected1",
-                        function(selectedVar){
-                            if (has_path=='ture') {
-                                console.log('run!');
-                                Tree.tree_path(svg_path, get_saturation(sub_data, selectedVar[0]), selectedVar[1])
-                            } else {
-                                console.log('no tree plot yet.');
-                            }
-                        });
+            var svg_academic = d3.select("#d3_academic"),
+                svg_career = d3.select("#d3_career"),
+                svg_path = d3.select("#d3_path");
 
 
+            //console.log(jobs)
+
+            // get full course and full job data
+            course_data = d3.csvParse(courses),
+                job_data = d3.csvParse(jobs);
+
+            console.log("job_data", job_data)
+
+            var Radar = radar_Vis(),
+                Rose = RP_Vis(),
+                Tree = TP_Vis();
+
+
+            var config = {
+                w: 400,
+                h: 400,
+                maxValue: 8,
+                levels: 8
+            }
+
+            console.log("output_job_idx", output_job_idx)
+
+            Radar.radar_plot(svg_academic, get_academic_data(selected_course), config);
+            Rose.rose_plot(svg_career, get_career_data(output_job_idx), d3.schemeCategory20);
+
+            var has_path = "false";
+            var sub_data = [];
+            Rose.dispatch.on("selected",
+                function (selectedVar) {
+                    has_path = "ture";
+                    sub_data = get_path_data(output_job_idx, selectedVar)
+                    Tree.tree_path(svg_path, sub_data)
+                });
+
+
+            Radar.dispatch.on("selected1",
+                function (selectedVar) {
+                    if (has_path == 'ture') {
+                        console.log('run!');
+                        Tree.tree_path(svg_path, get_saturation(sub_data, selectedVar[0]), selectedVar[1])
+                    } else {
+                        console.log('no tree plot yet.');
+                    }
+                });
+
+        }
     </script>
 
 </body>

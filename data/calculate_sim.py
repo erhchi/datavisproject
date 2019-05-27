@@ -9,7 +9,7 @@ input_idx = [34,21,41,88,81,12,121,141]
 
 
 def get_course_idx_by_concentration(idx):
-    c_df = pd.read_csv('courses.csv')
+    c_df = pd.read_csv('../data/courses.csv')
     res = {level:[] for level in set(c_df.level.tolist())}
     for i in idx:
         res[c_df.iloc[i].level].append(i)
@@ -25,10 +25,10 @@ def cosSim(inA,inB):
 
 def get_job_sim(idx):
     ## Load the Course matrix
-    c_mat = np.array(pd.read_csv('course_mat.csv'))
+    c_mat = np.array(pd.read_csv('../data/course_mat.csv'))
 
     ## Load the Job matrix
-    j_mat = np.array(pd.read_csv('job_mat.csv'))
+    j_mat = np.array(pd.read_csv('../data/job_mat.csv'))
 
     ## normalize the Job matrix
     j_mat = minmax_scale(j_mat, feature_range=(0,1), axis=0)
@@ -66,11 +66,11 @@ group_sim_idxs = get_group_sim(input_idx)
 
 
 ## write the index to a to js file
-with open('index_by_sim.js', 'w') as outfile:
-    outfile.write("var course_idx = ")
-    json.dump(input_idx, outfile)
-    outfile.write("\nvar job_idx = ")
-    json.dump(sorted_job_idx, outfile)
-    outfile.write("\nvar job_idx_by_groups = ")
-    json.dump(group_sim_idxs, outfile)
-outfile.close()
+# with open('index_by_sim.js', 'w') as outfile:
+#     outfile.write("var course_idx = ")
+#     json.dump(input_idx, outfile)
+#     outfile.write("\nvar job_idx = ")
+#     json.dump(sorted_job_idx, outfile)
+#     outfile.write("\nvar job_idx_by_groups = ")
+#     json.dump(group_sim_idxs, outfile)
+# outfile.close()
