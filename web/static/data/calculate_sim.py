@@ -10,7 +10,8 @@ input_idx = [34,21,41,88,81,12,121,141]
 
 
 def get_course_idx_by_concentration(idx):
-    c_df = pd.read_csv('../data/courses.csv')
+    fn = os.path.join(os.path.dirname(__file__), 'courses.csv')
+    c_df = pd.read_csv(fn)
     res = {level:[] for level in set(c_df.level.tolist())}
     for i in idx:
         res[c_df.iloc[i].level].append(i)
