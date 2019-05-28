@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import minmax_scale
 from numpy import linalg as la
+import os
 import json
 from collections import defaultdict
 
@@ -16,8 +17,6 @@ def get_course_idx_by_concentration(idx):
     return res
 
 
-
-
 def cosSim(inA,inB):
     num = np.dot(inA, inB)
     denom = la.norm(inA)*la.norm(inB)
@@ -25,10 +24,14 @@ def cosSim(inA,inB):
 
 def get_job_sim(idx):
     ## Load the Course matrix
-    c_mat = np.array(pd.read_csv('../data/course_mat.csv'))
+    fn = os.path.join(os.path.dirname(__file__), 'course_mat.csv')
+    c_mat = np.array(pd.read_csv(fn))
+    #c_mat = np.array(pd.read_csv('static/data/course_mat.csv'))
 
     ## Load the Job matrix
-    j_mat = np.array(pd.read_csv('../data/job_mat.csv'))
+    fn = os.path.join(os.path.dirname(__file__), 'job_mat.csv')
+    j_mat = np.array(pd.read_csv(fn))
+    #j_mat = np.array(pd.read_csv('../data/job_mat.csv'))
 
     ## normalize the Job matrix
     j_mat = minmax_scale(j_mat, feature_range=(0,1), axis=0)
