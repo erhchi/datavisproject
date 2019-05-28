@@ -21,14 +21,14 @@ def selection():
 
     job_idx_by_groups = get_group_sim(course_idx)
 
-    with open('../web/static/data/index_by_sim.js', 'w') as outfile:
-        outfile.write("var course_idx = ")
-        json.dump(course_idx, outfile)
-        outfile.write("\nvar job_idx = ")
-        json.dump(job_idx, outfile)
-        outfile.write("\nvar job_idx_by_groups = ")
-        json.dump(job_idx_by_groups, outfile)
-    outfile.close()
+    # with open('../web/static/data/index_by_sim.js', 'w') as outfile:
+    #     outfile.write("var course_idx = ")
+    #     json.dump(course_idx, outfile)
+    #     outfile.write("\nvar job_idx = ")
+    #     json.dump(job_idx, outfile)
+    #     outfile.write("\nvar job_idx_by_groups = ")
+    #     json.dump(job_idx_by_groups, outfile)
+    # outfile.close()
 
     toReturn = {'course_idx' : course_idx, 'job_idx' : job_idx, 'job_idx_by_groups' : job_idx_by_groups}
     return jsonify(toReturn)
