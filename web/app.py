@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template, request, redirect, url_for, jsonify
 
-from data.calculate_sim import *
+from web.static.data.calculate_sim import *
 
 app = Flask(__name__)
 
