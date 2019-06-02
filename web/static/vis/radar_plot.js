@@ -154,14 +154,14 @@ var radar_Vis = function() {
         });
         series=0;
 
-        var color = d3.scaleOrdinal(d3.schemeCategory10);
+        var color = d3.scaleOrdinal(d3.schemeDark2);
         
         d.forEach(function(y, x){
           g.selectAll(".nodes")
           .data(d).enter()
           .append("svg:circle")
           .attr("class", "radar-chart-serie"+series)
-          .attr('r', 5) // cfg.radius
+          .attr('r', 8) // cfg.radius
           .attr("alt", function(j){return Math.max(j.value, 0)})
           .attr("cx", function(j, i){
             dataValues.push([
@@ -174,7 +174,7 @@ var radar_Vis = function() {
             return cfg.h/2*(1-(Math.max(j.value, 0)/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total));
           })
           .attr("data-id", function(d){return d.label})
-          .style("fill", function(d){return color(d.label) } )
+          .style("fill", function(d){return color(5) } )
           .style("opacity", "0.3")
           .style("stroke-width", "1.5px")
           .style("stroke", cfg.color(series)).style("fill-opacity", .9)
