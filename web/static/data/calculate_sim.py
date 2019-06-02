@@ -39,12 +39,15 @@ def open_concentrations():
 
 
 def get_course_idx_by_concentration(idx):
-
     c_df = open_concentrations()
-
     res = {level:[] for level in set(c_df.level.tolist())}
+    # for i in idx:
+    #     res[c_df.iloc[i].level].append(i)
     for i in idx:
-        res[c_df.iloc[i].level].append(i)
+        course_id = c_df.iloc[i].dept+str(c_df.iloc[i].cno)
+        for j in range(c_df.shape[0]):
+            if course_id == c_df.iloc[j].dept+str(c_df.iloc[j].cno):
+                res[c_df.iloc[j].level].append(i)
     return res
 
 
@@ -80,16 +83,21 @@ def get_job_sim(idx):
 
 def get_group_sim(idx):
     dic = get_course_idx_by_concentration(idx)
-    for k in dic:
-        if dic[k]:
-            dic[k] = get_job_sim(dic[k])
-        else:
-            dic[k] = 0
-    return dic
+    return {k:get_job_sim(dic[k]) if dic[k] else 0 for k in dic}
+
+
+# def get_group_sim(idx):
+#     dic = get_course_idx_by_concentration(idx)
+#     for k in dic:
+#         if dic[k]:
+#             dic[k] = get_job_sim(dic[k])
+#         else:
+#             dic[k] = 0
+#     return dic
 
 ## get sorted job index for all selected courses
-sorted_job_idx = get_job_sim(input_idx)
+# sorted_job_idx = get_job_sim(input_idx)
 
 ## get sorted job index for all selected concentration
-group_sim_idxs = get_group_sim(input_idx)
+# group_sim_idxs = get_group_sim(input_idx)
 
