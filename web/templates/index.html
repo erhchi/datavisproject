@@ -28,11 +28,17 @@
 </head>
 <body>
 
-    <a href="/">The Fork Bombers</a><br/>
+{#    <a href="/">The Fork Bombers</a><br/>#}
 
-        	<div id="SelectMenus">
+<div width="100%">
+	<h1 width="100%" style="text-align: center; font-size: 30px; overflow: auto; margin-top: 0px; margin-bottom: 0px">THE FORK BOMBERS</h1>
+	<h1 style="text-align: center; font-size: 40px; overflow: auto; margin-top: 0px; margin-bottom: 0px">ELECTIVE SELECTOR</h1>
+
+</div>
+<div style="display: flex">
+	<div id="SelectMenus" style="margin-right: 50px">
 		<!-- Concentration Menu -->
-		<div style="float: left; margin-right: 50px">
+		<div style="float: left; margin-top: 50px">
 			<h2 style="font-family:sans-serif"/>Select Concentration</h1>
 
 			<div id="concentrationSelect" onchange="LoadConcentrationCourses(courseData)">
@@ -41,7 +47,7 @@
 		</div>
 
 		<!-- Select Course Menu -->
-		<div style="float: left; margin-right: 50px">
+		<div style="float: left; margin-top: 100px">
 			<h2 style="font-family:sans-serif"/>Select Course</h2>
 
 			<div id="courseSelect" onchange="AddCourseToPool(courseData)">
@@ -51,7 +57,7 @@
 		</div>
 
 		<!-- Selected Course Display -->
-		<div id="SelectedDisplay" style="float: left; margin-right: 50px">
+		<div id="SelectedDisplay" style="float: left; margin-top: 100px">
 			<h2 style="font-family:sans-serif">Selected Courses</h2>
 
 			<ul id="list" style="width: 300px; height: 300px; border: 2px solid black; list-style-type: none;"
@@ -67,12 +73,20 @@
     <script src="{{ url_for('static',filename='scripts/mike.js')}}"></script>
 
 
-    <svg id="d3_academic" width="700" height="500"></svg>
+	<!-- Create svg -->
+	<div id="Visuals" style="margin-top: 50px;">
+		<!-- Top row -->
+		<div style="display: flex; margin-left: 50px">
+			<svg id="d3_academic" width="700" height="500"></svg>
+			<svg id="d3_career" width="700" height="500"></svg>
+		</div>
 
-    <svg id="d3_career" width="700" height="500"></svg>
-	<svg id="d3_bar" width="960" height="700"></svg>
-    <svg id="d3_path" width="1500" height="1000"></svg>
-
+		<!-- Bottom row -->
+		<div style="margin-left: 100px">
+			<svg id="d3_bar" width="960" height="700"></svg>
+		</div>
+	</div>
+</div>
 
     <!-- Load data -->
 {#    <script src="{{ url_for('static',filename='data/courses.csv.js')}}"></script>#}

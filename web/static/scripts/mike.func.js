@@ -69,8 +69,10 @@ function LogConcChange(){
 
 
 function LoadConcentrations(data){
-    d3.select("#concDrop")
-    .selectAll("option")
+    var drop = d3.select("#concDrop");
+	drop.append("option")
+		.text("--- Please Select a Concentration ---");
+    drop.selectAll("empty")
     .data(data).enter()
     .append("option")
     .attr("value", function(d) { return d.concentration; })
