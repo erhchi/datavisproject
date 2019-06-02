@@ -27,7 +27,6 @@ function dragEndHandler(ev){
 
         console.log(selectedCoursePool);
         var list = $("#list");
-        //console.log(list[0].childNodes);
         var listElements = list[0].childNodes;
         
         for (var i = 0; i < listElements.length; ++i){
@@ -91,8 +90,10 @@ function LoadConcentrationCourses(data){
             selectedData.push(data[i]);
     }
     
-    d3.select("#courseDrop")
-        .selectAll("empty")
+	drop.append("option").text(" --- Please Select Your Courses --- ")
+	
+    
+    drop.selectAll("empty")
         .data(selectedData)
         .enter()
         .append("option")
