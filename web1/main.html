@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mark up</title>
+    <title>TFB's Elective Selector</title>
     <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="./data/mike.conc.csv.js"></script>
 	<script src="./data/mike.courses.csv.js"></script>
 	<script src="./control_flow_js/mike.func.js"></script>
-
 
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -20,15 +19,18 @@
 <body>
 	<!-- 
 		TODO:	
-			- Much formatting.  Make it look pretty.
-			- Move all css styles to css file.
-			- Change select course menu from drop down to draggable list?
+			- Layout
+			- External CSS
 	-->
+<div width="100%">
+	<h1 width="100%" style="text-align: center; font-size: 30px; overflow: auto; margin-top: 0px; margin-bottom: 0px">THE FORK BOMBERS</h1>
+	<h1 style="text-align: center; font-size: 40px; overflow: auto; margin-top: 0px; margin-bottom: 0px">ELECTIVE SELECTOR</h1>
 
-
-	<div id="SelectMenus">
+</div>
+<div style="display: flex">
+	<div id="SelectMenus" style="margin-right: 50px">
 		<!-- Concentration Menu -->
-		<div style="float: left; margin-right: 50px">
+		<div style="margin-top: 50px">
 			<h2 style="font-family:sans-serif"/>Select Concentration</h1>
 
 			<div id="concentrationSelect" onchange="LoadConcentrationCourses(courseData)">
@@ -37,7 +39,7 @@
 		</div>
 
 		<!-- Select Course Menu -->
-		<div style="float: left; margin-right: 50px">
+		<div style="margin-top: 100px">
 			<h2 style="font-family:sans-serif"/>Select Course</h2>
 
 			<div id="courseSelect" onchange="AddCourseToPool(courseData)">
@@ -46,7 +48,7 @@
 		</div>
 
 		<!-- Selected Course Display -->
-		<div id="SelectedDisplay" style="float: left; margin-right: 50px">
+		<div id="SelectedDisplay" style="margin-top: 100px">
 			<h2 style="font-family:sans-serif">Selected Courses</h2>
 
 			<ul id="list" style="width: 300px; height: 300px; border: 2px solid black; list-style-type: none;" 
@@ -60,29 +62,31 @@
 	<!-- Mike SCRIPT -->
 	<script src="./control_flow_js/mike.js"></script>
 
-
 	<!-- Create svg -->
-    <svg id="d3_academic" width="700" height="500"></svg>
-    <svg id="d3_career" width="700" height="500"></svg>
-	<svg id="d3_bar" width="960" height="700"></svg>
-    <svg id="d3_path" width="1500" height="1000"></svg>
-
-    
+	<div id="Visuals" style="margin-top: 50px;">
+		<!-- Top row -->
+		<div style="display: flex; margin-left: 50px">
+			<svg id="d3_academic" width="700" height="500"></svg>
+			<svg id="d3_career" width="700" height="500"></svg>
+		</div>
+		
+		<!-- Bottom row -->
+		<div style="margin-left: 100px">
+			<svg id="d3_bar" width="960" height="700"></svg>
+		</div>
+	</div>
+</div>    
 
     <!-- Load data -->
     <script src="./data/jobs.csv.js"></script>
-
-    
-
+	
     <!-- Load plot fuctions -->
 	<script src="./vis_js/radar_plot.js"></script>
     <script src="./vis_js/rose_plot.js"></script>
     <script src="./vis_js/bar_chart.js"></script>
 	<script src="./vis_js/tree_path.js"></script>
-    
-
+   
     <script src="./control_flow_js/vis_bar_ver.js"></script> 
-	<!-- <script src="./control_flow_js/vis_tree_ver.js"></script> -->
 
 </body>
 </html>

@@ -69,12 +69,16 @@ function LogConcChange(){
 
 
 function LoadConcentrations(data){
-    d3.select("#concDrop")
-    .selectAll("option")
-    .data(data).enter()
-    .append("option")
-    .attr("value", function(d) { return d.concentration; })
-    .text(function(d) { return d.concentration; });
+	var drop = d3.select("#concDrop");
+	
+	drop.append("option")
+		.text("--- Please Select a Concentration ---");
+
+    drop.selectAll("empty")
+		.data(data).enter()
+		.append("option")
+		.attr("value", function(d) { return d.concentration; })
+		.text(function(d) { return d.concentration; });
 }
 
 
@@ -144,7 +148,7 @@ function getConcList(){
     var visited = new Set(),
         res_list = [];
 
-    d3.csv("./static/data/courses.csv", function(error, data){
+    d3.csv("./data/courses.csv", function(error, data){
         
         for (i=0; i<data.length; i++){
             if ( !(visited.has(data[i]["level"])) ) {

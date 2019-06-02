@@ -20,12 +20,12 @@ def startup(path):
     return send_from_directory('.', path)
 
 
-# @app.route('/test/<input_idx>')
-# def run_ML(input_idx):
-#     input_idx = list(map( int, input_idx.split(',') ))
-#     ## get sorted job index for all selected courses
-#     sorted_job_idx = get_job_sim(input_idx)
-#     return ','.join(map(str,sorted_job_idx))
+@app.route('/test/<input_idx>')
+def run_ML(input_idx):
+    input_idx = list(map( int, input_idx.split(',') ))
+    ## get sorted job index for all selected courses
+    sorted_job_idx = get_job_sim(input_idx)
+    return ','.join(map(str,sorted_job_idx))
 
 
 @app.route('/get_sim/')
@@ -48,3 +48,6 @@ def get_groupby_sim():
     input_idx = list(map(int, data.split(',')))
     dic = get_group_sim(input_idx)
     return json.dumps(dic)
+	
+if __name__ == '__main__':
+    app.run()
