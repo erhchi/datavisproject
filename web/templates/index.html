@@ -31,40 +31,47 @@
 {#    <a href="/">The Fork Bombers</a><br/>#}
 
 <div width="100%">
-	<h1 width="100%" style="text-align: center; font-size: 30px; overflow: auto; margin-top: 0px; margin-bottom: 0px">THE FORK BOMBERS</h1>
-	<h1 style="text-align: center; font-size: 40px; overflow: auto; margin-top: 0px; margin-bottom: 0px">ELECTIVE SELECTOR</h1>
+	<h1 width="100%" class="TeamName">THE FORK BOMBERS</h1>
+	<h1 width="100%" class="ProjectName">ELECTIVE SELECTOR</h1>
 
 </div>
-<div style="display: flex">
+<div class="SelectGroup">
 	<div id="SelectMenus" style="margin-right: 50px">
 		<!-- Concentration Menu -->
-		<div style="float: left; margin-top: 50px">
-			<h2 style="font-family:sans-serif"/>Select Concentration</h1>
-
+		<div class="ConcentrationMenu">
+		
+			<h2/>Select Concentration</h1>
+			
 			<div id="concentrationSelect" onchange="LoadConcentrationCourses(courseData)">
 				<select id="concDrop"></select>
 			</div>
+			
 		</div>
 
 		<!-- Select Course Menu -->
-		<div style="float: left; margin-top: 100px">
-			<h2 style="font-family:sans-serif"/>Select Course</h2>
+		<div class="CourseMenu">
+		
+			<h2>Select Course</h2>
 
 			<div id="courseSelect" onchange="AddCourseToPool(courseData)">
-
 				<select id="courseDrop"></select>
 			</div>
+			
 		</div>
 
 		<!-- Selected Course Display -->
-		<div id="SelectedDisplay" style="float: left; margin-top: 100px">
+		<div id="SelectedDisplay" class="CourseMenu">
+		
 			<h2 style="font-family:sans-serif">Selected Courses</h2>
 
-			<ul id="list" style="width: 300px; height: 300px; border: 2px solid black; list-style-type: none;"
-			ondragend="dragEndHandler(event)" ondrop="drop_handler(event)" ondragover="dragover_handler(event)"></ul>
+			<ul id="list" class="SelectedDisplayList"
+				ondragend="dragEndHandler(event)" 
+				ondrop="drop_handler(event)" 
+				ondragover="dragover_handler(event)"></ul>
 
 			<!-- Clear Selected Pool Button -->
 			<button id="clearSelectionButton" onclick="ClearSelections(selectedCoursePool)">Clear</button>
+			
 		</div>
 	</div>
 
@@ -75,15 +82,21 @@
 
 	<!-- Create svg -->
 	<div id="Visuals" style="margin-top: 50px;">
+	
 		<!-- Top row -->
-		<div style="display: flex; margin-left: 50px">
+		<div class="VisualsRow1">
+		
 			<svg id="d3_academic" width="700" height="500"></svg>
+			
 			<svg id="d3_career" width="700" height="500"></svg>
+			
 		</div>
 
 		<!-- Bottom row -->
-		<div style="margin-left: 100px">
+		<div class="VisualsRow2">
+		
 			<svg id="d3_bar" width="960" height="700"></svg>
+			
 		</div>
 	</div>
 </div>

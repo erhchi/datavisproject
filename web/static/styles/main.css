@@ -1,7 +1,64 @@
-h1{
+h1
+{
     font-family: Arial, sans-serif;
     font-size: 24px;
-    color: maroon;
+    color: blue;
+}
+
+.TeamName
+{
+	text-align: center;
+	font-size: 30px;
+	overflow: auto;
+	margin-top: 0px;
+	margin-bottom: 0px
+}
+
+.ProjectName
+{
+	text-align: center;
+	font-size: 40px;
+	overflow: auto;
+	margin-top: 0px;
+	margin-bottom: 0px
+}
+
+.SelectGroup
+{
+	display: flex;
+	font-family: sans-serif;
+	margin-right: 50px;
+}
+
+.ConcentrationMenu
+{
+	float: left; 
+	margin-top: 50px;
+}
+
+.CourseMenu
+{
+	float: left;
+	margin-top: 100px;
+}
+
+.SelectedDisplayList
+{
+	width: 300px;
+	height: 300px;
+	border: 2px solid black;
+	list-style-type: none;
+}
+
+.VisualsRow1
+{
+	display: flex;
+	margin-left: 50px;
+}
+
+.VisualsRow2
+{
+	margin-left: 100px;
 }
 
 /*a{*/
