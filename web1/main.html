@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mark up</title>
+    <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="./data/mike.conc.csv.js"></script>
+	<script src="./data/mike.courses.csv.js"></script>
+	<script src="./control_flow_js/mike.func.js"></script>
+
+
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+
+</head>
+<body>
+	<!-- 
+		TODO:	
+			- Much formatting.  Make it look pretty.
+			- Move all css styles to css file.
+			- Change select course menu from drop down to draggable list?
+	-->
+
+
+	<div id="SelectMenus">
+		<!-- Concentration Menu -->
+		<div style="float: left; margin-right: 50px">
+			<h2 style="font-family:sans-serif"/>Select Concentration</h1>
+
+			<div id="concentrationSelect" onchange="LoadConcentrationCourses(courseData)">
+				<select id="concDrop"></select>
+			</div>
+		</div>
+
+		<!-- Select Course Menu -->
+		<div style="float: left; margin-right: 50px">
+			<h2 style="font-family:sans-serif"/>Select Course</h2>
+
+			<div id="courseSelect" onchange="AddCourseToPool(courseData)">
+				<select id="courseDrop"></select>
+			</div>
+		</div>
+
+		<!-- Selected Course Display -->
+		<div id="SelectedDisplay" style="float: left; margin-right: 50px">
+			<h2 style="font-family:sans-serif">Selected Courses</h2>
+
+			<ul id="list" style="width: 300px; height: 300px; border: 2px solid black; list-style-type: none;" 
+			ondragend="dragEndHandler(event)" ondrop="drop_handler(event)" ondragover="dragover_handler(event)"></ul>
+
+			<!-- Clear Selected Pool Button -->
+			<button id="clearSelectionButton" onclick="ClearSelections(selectedCoursePool)">Clear</button>
+		</div>	
+	</div>
+
+	<!-- Mike SCRIPT -->
+	<script src="./control_flow_js/mike.js"></script>
+
+
+	<!-- Create svg -->
+    <svg id="d3_academic" width="700" height="500"></svg>
+    <svg id="d3_career" width="700" height="500"></svg>
+	<svg id="d3_bar" width="960" height="700"></svg>
+    <svg id="d3_path" width="1500" height="1000"></svg>
+
+    
+
+    <!-- Load data -->
+    <script src="./data/jobs.csv.js"></script>
+
+    
+
+    <!-- Load plot fuctions -->
+	<script src="./vis_js/radar_plot.js"></script>
+    <script src="./vis_js/rose_plot.js"></script>
+    <script src="./vis_js/bar_chart.js"></script>
+	<script src="./vis_js/tree_path.js"></script>
+    
+
+    <script src="./control_flow_js/vis_bar_ver.js"></script> 
+	<!-- <script src="./control_flow_js/vis_tree_ver.js"></script> -->
+
+</body>
+</html>
