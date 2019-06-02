@@ -5,6 +5,8 @@ var TP_Vis = function() {
         tree_path: function(svg, data, linkage_color = "black") {
                 // https://bl.ocks.org/d3noob/76d6fa0dff4af77544da9dd69aef9249
                 // set the dimensions and margins of the diagram
+
+
                 var margin = {top: 20, right: 450, bottom: 20, left: 350},
                     width = +svg.attr("width") - margin.left - margin.right,
                     height = +svg.attr("height") - margin.top - margin.bottom;
@@ -93,7 +95,7 @@ var TP_Vis = function() {
 
 var get_path_data = function(job_idx, selectedVar) {
     // selectedVar: [title_name, color]
-
+    
     // setting the thickness variables
     var most_thick = 10,
         most_thin = 0.05;
@@ -139,15 +141,14 @@ var get_path_data = function(job_idx, selectedVar) {
             }
         }
     }
+    console.log(res)
+    res.children.sort(dynamicSort("-thickness"));
     return res
 }
 
 
-var get_saturation = function(sub_data, selected_conc){
-    
-
-    var one = 0, two = 0, three = 0;
-    var selected_conc_sim = job_idx_by_groups[selected_conc];
+var get_saturation = function(sub_data, selected_conc_sim){
+    // var selected_conc_sim = job_idx_by_groups[selected_conc];
     if (selected_conc_sim!=0) {
 
         var valid_idx_list = [];
@@ -161,15 +162,13 @@ var get_saturation = function(sub_data, selected_conc){
             for (j=0; j<valid_idx_list.length; j++) {
                 if (sub_data.name == job_data[valid_idx_list[j]]["title"] && sub_data.children[i]["name"] == job_data[valid_idx_list[j]]["sub_title"]) {
                     var saturate_value = (valid_idx_list.length - j) / valid_idx_list.length;
+                    
                     if (saturate_value < 0.5){
                         var saturate_code = 0.05;
-                        one +=1
                     } else if (saturate_value < 0.9) {
                         var saturate_code = 0.7;
-                        two +=1
                     } else {
                         var saturate_code = 1.2;
-                        three +=1
                     }
                     sub_data.children[i].saturate = saturate_code 
                     break;
@@ -181,7 +180,20 @@ var get_saturation = function(sub_data, selected_conc){
             sub_data.children[i].saturate = 0.1
         }
     }
-    console.log(one + '|' + two + '|'+ three);
-    console.log(sub_data);
     return sub_data
+}
+
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        /* next line works with strings and numbers, 
+         * and you may want to customize it to your needs
+         */
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
 }

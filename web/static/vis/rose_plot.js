@@ -3,6 +3,9 @@
 var RP_Vis = function() {
     var newRP = {
             rose_plot: function(svg, data, color_scheme) {
+
+                svg.selectAll("g").remove();
+
                 // set the dimensions and margins of the graph
                 var margin = {top: 10, right: 10, bottom: 10, left: 10},
                     width = +svg.attr("width") - margin.left - margin.right,
@@ -38,7 +41,7 @@ var RP_Vis = function() {
                     .enter()
                     .append("path")
                     .attr("fill", function(d) { return color(d.label);})
-                    .on("click", function(d) { newRP.dispatch.call("selected",{},
+                    .on("click", function(d) { newRP.dispatch.call("selected_by_rose",{},
                                                                     [d.label, color(d.label)]); })
                     .attr("d", d3.arc()     // imagine your doing a part of a donut plot
                         .innerRadius(innerRadius)
@@ -76,14 +79,13 @@ var RP_Vis = function() {
                         .style("font-size", 10)
                         .text(function(d) { return d; });
             },
-            dispatch: d3.dispatch("selected")
+            dispatch: d3.dispatch("selected_by_rose")
         }
     return newRP
 }
 
-var get_career_data = function(job_idx) {
+var get_career_data = function(job_idx) { 
     var titles = new Set()
-  
     for (j = 0; j < job_data.length; j++){
             titles.add(job_data[j]['title'])
     }
@@ -99,7 +101,7 @@ var get_career_data = function(job_idx) {
   
     for (i = 0; i < job_idx.length; i++){
             for (k = 0; k < res.length; k++){
-                    if (job_data[job_idx[i]]['title'] == res[k]['label']) {res[k]['value']+=(job_idx.length-i)/job_idx.length/4; break;}
+                    if (job_data[+job_idx[i]]['title'] == res[k]['label']) {res[k]['value']+=(job_idx.length-i)/job_idx.length/4; break;}
                     }
             }
     

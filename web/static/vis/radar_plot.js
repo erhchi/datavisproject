@@ -2,7 +2,11 @@
 var radar_Vis = function() {
   var nweRadar = {
       radar_plot: function(svg, d, options){
-        
+
+        svg.selectAll("g").remove();
+
+        // console.log(d)
+
         var cfg = {
         radius: 5,
         w: +svg.attr("width"),
@@ -174,8 +178,8 @@ var radar_Vis = function() {
           .style("opacity", "0.3")
           .style("stroke-width", "1.5px")
           .style("stroke", cfg.color(series)).style("fill-opacity", .9)
-          .on("click", function(d) {console.log([d.label, color(d.label)]);
-                                    nweRadar.dispatch.call("selected1",{},
+          .on("click", function(d) { //console.log([d.label, color(d.label)]);
+                                    nweRadar.dispatch.call("selected_by_radar",{},
                                                               [d.label, color(d.label)]); })
           .on('mouseover', function (d){
                 newX =  parseFloat(d3.select(this).attr('cx')) - 10;
@@ -215,7 +219,7 @@ var radar_Vis = function() {
               .style('font-family', 'sans-serif')
               .style('font-size', '13px');
         },
-        dispatch: d3.dispatch("selected1")
+        dispatch: d3.dispatch("selected_by_radar")
     };
   return nweRadar
 }
@@ -231,30 +235,43 @@ var get_academic_data = function(course_idx) {
   //  {label:"Game and Real-Time Systems",       value:4},
   //  {label:"Software and Systems Development", value:2}]
 
-  var levels = new Set()
-  for (j = 0; j < course_data.length; j++){
-      levels.add(course_data[j]['level'])
-  }
-  // console.log(levels)
+  // console.log(course_idx);
 
-  var res = [];
+  
 
-  levels.forEach( function(d){ // console.log(d);
-                                  res.push({label: d, value: 1}) 
-                              })
+  // var levels = new Set()
+  
+  // for (j = 0; j < courseData.length; j++){
+  //     levels.add(courseData[j]['level'])
+  // }
+  // // console.log(levels)
+
+  // var res = new Array;
+  // levels.forEach( function(d){ console.log({label: d, value: 0});
+  //                                 res.push({label: d, value: 0}); 
+  //                             })
   // console.log(res)
-   
-
+  var res = [ {label:"Artificial Intelligence",          value:1},
+              {label:"Data Science",                     value:1},
+              {label:"Database Systems",                 value:1},
+              {label:"Theory",                           value:1},
+              {label:"Human-Computer Interaction",       value:1},
+              {label:"Software Engineering",             value:1},
+              {label:"Game and Real-Time Systems",       value:1},
+              {label:"Software and Systems Development", value:1}]
+  
   for (i = 0; i < course_idx.length; i++){
-      for (j = 0; j < course_data.length; j++){
-          if (course_data[course_idx[i]]['name'] == course_data[j]['name']) {
-              for (k = 0; k < res.length; k++){
-                  // console.log(res[k]['label']);
-                  // console.log(res);
-                  if (res[k]['label'] == course_data[course_idx[i]]['level']) {res[k]['value']+=1; break;} 
+      for (j = 0; j < courseData.length; j++){
+          // compare the course name
+          if (courseData[course_idx[i]]['name'] == courseData[j]['name']) {
+            // loop through all concentration
+            for (k = 0; k < res.length; k++){
+                if (res[k]['label'] == courseData[j]['level']) {
+                    res[k]['value']+=1;} 
               }
           }
       }
   }
+
   return res
 };
