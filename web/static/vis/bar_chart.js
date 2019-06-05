@@ -2,7 +2,7 @@
 
 var BC_Vis = function() {
     var newBC = {
-        bar_cahrt: function(svg, data, title) {
+        bar_cahrt: function(svg, data, title, color) {
             // set the dimensions and margins of the graph
             var margin = {top: 60, right: 20, bottom: 30, left: 350},
                 width = +svg.attr("width") - margin.left - margin.right,
@@ -41,7 +41,8 @@ var BC_Vis = function() {
             });
 
             // Scale the range of the data in the domains
-            x.domain([0, d3.max(data, function(d){ return d.relevance; })])
+            // x.domain([0, d3.max(data, function(d){ return d.relevance; })])
+            x.domain([0, 100])
             y.domain(data.map(function(d) { return d.job_title; }));
             //y.domain([0, d3.max(data, function(d) { return d.relevance; })]);
 
@@ -55,11 +56,11 @@ var BC_Vis = function() {
                 .attr("y", function(d) { return y(d.job_title); })
                 .attr("height", y.bandwidth())
                 .style("fill", function(d) {
-                    console.log("saturate" in d);
+                    // console.log("saturate" in d);
                     if ("saturate" in d){
-                        return d3.interpolateLab("white", d.color)(d.saturate)
+                        return d3.interpolateLab("white", color)(d.saturate)
                     } else {
-                        return d.color;
+                        return color;
                     }
                 });
                 // .style("stroke", function(d) { return d3.interpolateLab("white", d.color)(d.saturate);});
@@ -76,46 +77,6 @@ var BC_Vis = function() {
     }
     return newBC
 }
-
-
-
-var get_bar_data = function(job_idx, selectedVar) {
-    // selectedVar: [title_name, color]
-
-    var cate_count = 0,
-        valid_job_set = new Set();
-    // create a job set for the selected title    
-    for (j = 0; j < job_data.length; j++){
-        if (job_data[j]["title"]==selectedVar[0]) { valid_job_set.add(j); cate_count+=1}
-    }
-    // extract the jobs' index from entire job index list if the jobs are in the set
-    var valid_job_idx = []
-    for (j = 0; j < job_idx.length; j++){
-        if ( valid_job_set.has(job_idx[j]) ) {valid_job_idx.push(job_idx[j]) }
-    }
-    
-    var res = [];
-    // push the child nodes into the parent node
-    for (j = 0; j < job_data.length; j++){    
-        if (job_data[j]["title"]==selectedVar[0]) {
-            for (i = 0; i < valid_job_idx.length; i++){
-                if(valid_job_idx[i]==j){
-                    // calculate the thickness
-                    var relevance = 100 * (cate_count-i) / cate_count;
-                    
-                    res.push({'job_title': job_data[j]["sub_title"],
-                              'relevance': relevance,
-                              'color': selectedVar[1],
-                              'name': selectedVar[0]});
-                    break;
-                }
-            }
-        }
-    }
-    res.sort(dynamicSort("relevance"));
-    return res
-}
-
 
 var get_saturation_bar = function(sub_data, selected_conc_sim){
     // var selected_conc_sim = job_idx_by_groups[selected_conc];
@@ -165,5 +126,89 @@ function dynamicSort(property) {
          */
         var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
         return result * sortOrder;
+    }
+}
+
+
+
+var get_bar_data = function(job_idx, title) {
+    // selectedVar: [title_name, color]
+    var valid_job_set = new Set();
+    // create a job set for the selected title    
+    for (j = 0; j < job_data.length; j++){
+         
+        if (job_data[j]["title"]==title) { valid_job_set.add(j); }
+    }
+    // console.log(valid_job_set)
+    // extract the jobs' index from entire job index list if the jobs are in the set
+    var valid_job_idx = []
+    for (j = 0; j < job_idx.length; j++){
+        if ( valid_job_set.has(job_idx[j]) ) {valid_job_idx.push(job_idx[j]) }
+    }
+    
+    var res = [];
+
+    // get the relevance for valid
+    for (j = 0; j < job_idx.length; j++){
+        if (job_data[job_idx[j]]["title"]==title) {
+                var relevance = 100 * (job_idx.length-j) / job_idx.length;
+                
+                res.push({'job_title': job_data[job_idx[j]]["sub_title"],
+                            'relevance': relevance,
+                            'name': title});
+        }
+    }
+    res.sort(dynamicSort("relevance"))
+    // console.log(res)
+    return res
+}
+
+
+
+var mod_bar_data = function(job_idx, title) {
+    for (j = 0; j < job_idx.length; j++){
+        for (i = 0; i < sub_data[title].length; i++){
+            if (job_data[job_idx[j]]["title"]==title && job_data[job_idx[j]]["sub_title"]==sub_data[title][i]["job_title"]) {
+                // console.log(title)
+                var relevance = 100 * (job_idx.length-j) / job_idx.length;
+                sub_data[title][i]["relevance"] = relevance;
+            }
+        }    
+    }
+}
+
+var get_saturation_bar1 = function(selected_conc_sim, title){
+    // var selected_conc_sim = job_idx_by_groups[selected_conc];
+    if (selected_conc_sim!=0) {
+
+        var valid_idx_list = [];
+        for (j=0; j<selected_conc_sim.length; j++) {
+            if (sub_data[title][0].name == job_data[selected_conc_sim[j]]["title"]){
+                valid_idx_list.push(selected_conc_sim[j])
+            }
+        }
+
+
+        for (i=0; i<sub_data[title].length; i++) {
+            for (j=0; j<valid_idx_list.length; j++) {
+                if (sub_data[title][i].name == job_data[valid_idx_list[j]]["title"] && sub_data[title][i]["job_title"] == job_data[valid_idx_list[j]]["sub_title"]) {
+                    var saturate_value = (valid_idx_list.length - j) / valid_idx_list.length;
+                    // console.log(saturate_value)
+                    if (saturate_value < 0.5){
+                        var saturate_code = 0.05;
+                    } else if (saturate_value < 0.9) {
+                        var saturate_code = 0.7;
+                    } else {
+                        var saturate_code = 1.2;
+                    }
+                    sub_data[title][i].saturate = saturate_code 
+                    break;
+                } 
+            }
+        }
+    } else {
+        for (i=0; i<sub_data[title].length; i++) {
+            sub_data[title][i].saturate = 0.9
+        }
     }
 }

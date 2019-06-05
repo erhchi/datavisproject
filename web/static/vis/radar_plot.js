@@ -178,9 +178,7 @@ var radar_Vis = function() {
           .style("opacity", "0.3")
           .style("stroke-width", "1.5px")
           .style("stroke", cfg.color(series)).style("fill-opacity", .9)
-          .on("click", function(d) { //console.log([d.label, color(d.label)]);
-                                    nweRadar.dispatch.call("selected_by_radar",{},
-                                                              [d.label, color(d.label)]); })
+          .on("click", function(d) { nweRadar.dispatch.call("selected_by_radar",{}, d.label); })
           .on('mouseover', function (d){
                 newX =  parseFloat(d3.select(this).attr('cx')) - 10;
                 newY =  parseFloat(d3.select(this).attr('cy')) - 5;
