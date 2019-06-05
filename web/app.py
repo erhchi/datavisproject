@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template, request, jsonify
 import json
-from web.static.data.calculate_sim import *
+from static.data.calculate_sim import *
 
 app = Flask(__name__)
 
@@ -44,10 +44,10 @@ def get_groupby_sim():
     input_idx = list(map(int, data.split(',')))
     dic = get_group_sim(input_idx)
     return json.dumps(dic)
+    
 
 if __name__ == '__main__':
     # app.run()
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-
