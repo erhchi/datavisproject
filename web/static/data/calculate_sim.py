@@ -10,8 +10,6 @@ from werkzeug.contrib.cache import SimpleCache
 cache = SimpleCache()
 
 
-input_idx = [34,21,41,88,81,12,121,141]
-
 def open_courses():
     course_data = cache.get('course_data')
     if course_data is None:
@@ -28,6 +26,7 @@ def open_jobs():
         cache.set('jobs_data', np.array(pd.read_csv(fn)))
         jobs_data = cache.get('jobs_data')
     return jobs_data
+
 
 def open_concentrations():
     concentration_data = cache.get('concentration_data')
@@ -61,7 +60,6 @@ def get_job_sim(idx):
     c_mat = open_courses()
     j_mat = open_jobs()
 
-
     ## normalize the Job matrix
     j_mat = minmax_scale(j_mat, feature_range=(0,1), axis=0)
 
@@ -84,20 +82,4 @@ def get_job_sim(idx):
 def get_group_sim(idx):
     dic = get_course_idx_by_concentration(idx)
     return {k:get_job_sim(dic[k]) if dic[k] else 0 for k in dic}
-
-
-# def get_group_sim(idx):
-#     dic = get_course_idx_by_concentration(idx)
-#     for k in dic:
-#         if dic[k]:
-#             dic[k] = get_job_sim(dic[k])
-#         else:
-#             dic[k] = 0
-#     return dic
-
-## get sorted job index for all selected courses
-# sorted_job_idx = get_job_sim(input_idx)
-
-## get sorted job index for all selected concentration
-# group_sim_idxs = get_group_sim(input_idx)
 

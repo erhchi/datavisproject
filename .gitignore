@@ -8,6 +8,8 @@
 *.o
 *.so
 *.pyc
+__pycache__/
+*.py[cod]
 
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
