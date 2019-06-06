@@ -26,40 +26,99 @@ h1
 
 .SelectGroup
 {
-	display: flex;
+	/*border: solid red;*/
+	/*display: flex;*/
 	font-family: sans-serif;
-	margin-right: 50px;
+	width: 15%;
+	display: inline-block;
+	float: left;
+	/*margin-right: 50px;*/
+	/*position: relative;*/
 }
+
+
+.Visuals{
+	/*display: flex;*/
+	width: 75%;
+	/*margin-top: 50px;*/
+	/*border: solid green 10px;*/
+	float: right;
+	position: relative;
+}
+
 
 .ConcentrationMenu
 {
-	float: left; 
-	margin-top: 50px;
+	/*border: solid black;*/
+	float: left;
+	/*position: absolute;*/
+	margin-top: 0px;
 }
 
 .CourseMenu
 {
+	/*border: solid black;*/
 	float: left;
-	margin-top: 100px;
+	/*position: absolute;*/
+	margin-top: 150px;
 }
 
-.SelectedDisplayList
+.SelectedDisplay
 {
+	margin-top: 200px;
+	/*position: absolute;*/
+	float: left;
+}
+
+.list{
 	width: 300px;
 	height: 300px;
 	border: 2px solid black;
 	list-style-type: none;
+
 }
+
+/*.CourseMenuList*/
+/*{*/
+	/*border: solid black;*/
+	/*float: left;*/
+	/*position: absolute;*/
+	/*margin-top: 200px;*/
+/*}*/
+
 
 .VisualsRow1
 {
-	display: flex;
-	margin-left: 50px;
+	/*border: solid blue;*/
+	/*display: flex;*/
+	float: left;
+	/*margin-left: 50px;*/
+	margin-top:0px;
+	/*position: absolute;*/
+}
+
+.VisualR1N1{
+	/*border: solid brown;*/
+	float: left;
+	/*width: 700px;*/
+	height: 500px;
+}
+
+.VisualR1N2{
+	/*border: solid brown;*/
+	float: right;
+	width: 700px;
+	height: 500px;
 }
 
 .VisualsRow2
 {
-	margin-left: 100px;
+	/*border: solid blue;*/
+	margin: 0 auto;
+     /*width: 100px;*/
+	/*margin-left: 100px;*/
+	/*margin-top: 150px;*/
+	/*position: absolute;*/
 }
 
 /*a{*/

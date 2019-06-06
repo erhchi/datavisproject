@@ -35,8 +35,8 @@
 	<h1 width="100%" class="ProjectName">ELECTIVE SELECTOR</h1>
 
 </div>
-<div class="SelectGroup">
-	<div id="SelectMenus" style="margin-right: 50px">
+
+	<div class="SelectGroup" id="SelectMenus">
 		<!-- Concentration Menu -->
 		<div class="ConcentrationMenu">
 		
@@ -60,11 +60,11 @@
 		</div>
 
 		<!-- Selected Course Display -->
-		<div id="SelectedDisplay" class="CourseMenu">
+		<div class="SelectedDisplay" >
 		
 			<h2 style="font-family:sans-serif">Selected Courses</h2>
 
-			<ul id="list" class="SelectedDisplayList"
+			<ul class="list" id="list" class="SelectedDisplayList"
 				ondragend="dragEndHandler(event)" 
 				ondrop="drop_handler(event)" 
 				ondragover="dragover_handler(event)"></ul>
@@ -73,33 +73,31 @@
 			<button id="clearSelectionButton" onclick="ClearSelections(selectedCoursePool)">Clear</button>
 			
 		</div>
-	</div>
+
+    </div>
 
     <!-- Mike SCRIPT -->
 {#	<script src="./control_flow_js/mike.js"></script>#}
     <script src="{{ url_for('static',filename='scripts/mike.js')}}"></script>
 
 
-	<!-- Create svg -->
-	<div id="Visuals" style="margin-top: 50px;">
-	
-		<!-- Top row -->
-		<div class="VisualsRow1">
-		
-			<svg id="d3_academic" width="700" height="500"></svg>
-			
-			<svg id="d3_career" width="700" height="500"></svg>
-			
-		</div>
+<!-- Create svg -->
+<div class="Visuals" id="Visuals">
+    <!-- Top row -->
+    <div class="VisualsRow1">
+{#        1#}
+        <div class="VisualR1N1"><svg id="d3_academic" height="500" width="600" ></svg></div>
+        <div class="VisualR1N2"><svg id="d3_career" height="500" width="900"></svg></div>
 
-		<!-- Bottom row -->
-		<div class="VisualsRow2">
-		
-			<svg id="d3_bar" width="960" height="700"></svg>
-			
-		</div>
-	</div>
+    </div>
+
+    <!-- Bottom row -->
+    <div class="VisualsRow2">
+{#        2#}
+        <svg id="d3_bar" width="960" height="700"></svg>
+    </div>
 </div>
+
 
     <!-- Load data -->
 {#    <script src="{{ url_for('static',filename='data/courses.csv.js')}}"></script>#}
@@ -113,9 +111,7 @@
     <script src="{{ url_for('static',filename='vis/tree_path.js')}}"></script>
     <script src="{{ url_for('static',filename='vis/radar_plot.js')}}"></script>
     <script src="{{ url_for('static',filename='vis/bar_chart.js')}}"></script>
-
     <script src="{{ url_for('static',filename='scripts/vis_bar_ver.js')}}"></script>
-
 
 </body>
 </html>
