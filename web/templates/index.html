@@ -4,114 +4,135 @@
     <meta charset="UTF-8">
     <title>The Fork Bombers</title>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/design.css')}}" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
     <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
-
-
-{#    <script src="./data/mike.conc.csv.js"></script>#}
-{#	<script src="./data/mike.courses.csv.js"></script>#}
-{#	<script src="./control_flow_js/mike.func.js"></script>#}
-
     <script src="{{ url_for('static',filename='data/mike.conc.csv.js')}}"></script>
     <script src="{{ url_for('static',filename='data/mike.courses.csv.js')}}"></script>
     <script src="{{ url_for('static',filename='scripts/mike.func.js')}}"></script>
-
-
-{#<script src="{{ url_for('static', filename='data/conc.csv.js')}}" type="javascript"></script>#}
-{#    <script src="{{ url_for('static', filename='data/courses.csv.js')}}" type="javascript"></script>#}
-{#<script src="{{ url_for('static', filename='mikes.js')}}" type="javascript"></script>#}
-{##}
-
+    <script src="{{ url_for('static',filename='scripts/side_navi_scripts.js')}}"></script>
 </head>
 <body>
 
-{#    <a href="/">The Fork Bombers</a><br/>#}
-
-<div width="100%">
-	<h1 width="100%" class="TeamName">THE FORK BOMBERS</h1>
-	<h1 width="100%" class="ProjectName">ELECTIVE SELECTOR</h1>
-
-</div>
-
-	<div class="SelectGroup" id="SelectMenus">
-		<!-- Concentration Menu -->
-		<div class="ConcentrationMenu">
-		
-			<h2/>Select Concentration</h1>
-			
-			<div id="concentrationSelect" onchange="LoadConcentrationCourses(courseData)">
-				<select id="concDrop"></select>
-			</div>
-			
-		</div>
-
-		<!-- Select Course Menu -->
-		<div class="CourseMenu">
-		
-			<h2>Select Course</h2>
-
-			<div id="courseSelect" onchange="AddCourseToPool(courseData)">
-				<select id="courseDrop"></select>
-			</div>
-			
-		</div>
-
-		<!-- Selected Course Display -->
-		<div class="SelectedDisplay" >
-		
-			<h2 style="font-family:sans-serif">Selected Courses</h2>
-
-			<ul class="list" id="list" class="SelectedDisplayList"
-				ondragend="dragEndHandler(event)" 
-				ondrop="drop_handler(event)" 
-				ondragover="dragover_handler(event)"></ul>
-
-			<!-- Clear Selected Pool Button -->
-			<button id="clearSelectionButton" onclick="ClearSelections(selectedCoursePool)">Clear</button>
-			
-		</div>
-
-    </div>
-
-    <!-- Mike SCRIPT -->
-{#	<script src="./control_flow_js/mike.js"></script>#}
-    <script src="{{ url_for('static',filename='scripts/mike.js')}}"></script>
 
 
-<!-- Create svg -->
-<div class="Visuals" id="Visuals">
-    <!-- Top row -->
-    <div class="VisualsRow1">
-{#        1#}
-        <div class="VisualR1N1"><svg id="d3_academic" height="500" width="600" ></svg></div>
-        <div class="VisualR1N2"><svg id="d3_career" height="500" width="900"></svg></div>
+        <header>
+            <!-- <div class="box"> -->
+                <div class="navcol"><div class="centertext"><a class="nav" href="/">HOME</a></div></div>
+                <!-- <div class="navcol"><div class="navitem">HOME</div></div> -->
+                <!-- <div class="navcol"><br/>HOME</div> -->
+                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis1">VIS 1 - Radar Plot</a></div></div>
+                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis2">VIS 2 - Rose Plot</a></div></div>
+                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis3">VIS 3 - Bar Chart</a></div></div>
+            <!-- </div> -->
 
-    </div>
+        </header>
 
-    <!-- Bottom row -->
-    <div class="VisualsRow2">
-{#        2#}
-        <svg id="d3_bar" width="960" height="700"></svg>
-    </div>
-</div>
+        <section>
+            <!-- <div class="selections" id="selections"> -->
+            <div id="selections">
+                	<div class="SelectGroup" id="SelectMenus">
+                    <!-- Concentration Menu -->
+                    <div class="ConcentrationMenu">
+
+                        <h2/>Select Concentration</h1>
+
+                        <div id="concentrationSelect" onchange="LoadConcentrationCourses(courseData)">
+                            <select id="concDrop"></select>
+                        </div>
+
+                    </div>
+
+                    <!-- Select Course Menu -->
+                    <div class="CourseMenu">
+
+                        <h2>Select Course</h2>
+
+                        <div id="courseSelect" onchange="AddCourseToPool(courseData)">
+                            <select id="courseDrop"></select>
+                        </div>
+
+                    </div>
+
+                    <!-- Selected Course Display -->
+                    <div class="SelectedDisplay" >
+
+                        <h2 style="font-family:sans-serif">Selected Courses</h2>
+
+                        <ul class="list" id="list" class="SelectedDisplayList"
+                            ondragend="dragEndHandler(event)"
+                            ondrop="drop_handler(event)"
+                            ondragover="dragover_handler(event)"></ul>
+
+                        <!-- Clear Selected Pool Button -->
+                        <button id="clearSelectionButton" onclick="ClearSelections(selectedCoursePool)">Clear</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="visualizations">
+
+                <section id="vis1" class="visbox">
+{#                    <div class="VisualsRow1">#}
+                        <div class="VisualR1N1"><svg id="d3_academic" height="500" width="600" ></svg></div>
+
+{#                    </div>#}
+                </section>
+
+                <section id="vis2" class="visbox">
+                        <div class="VisualR1N2"><svg id="d3_career" height="500" width="900"></svg></div>
+                </section>
+
+                <br/>
+                <br/>
+
+                <section id="vis3" class="visbox">
+                    <div class="VisualsRow2">
+                        <svg id="d3_bar" width="960" height="700"></svg>
+                    </div>
+                    <br/>
+                    <a href="#top">top</a>
+                </section>
+                <br/>
+                <br/>
+            </div>
+
+            <br/>
+            <br/>
+        </section>
+
+        <footer>
+            The Fork Bombers
+        </footer>
+
+<!-- Mike SCRIPT -->
+<script src="{{ url_for('static',filename='scripts/mike.js')}}"></script>
 
 
-    <!-- Load data -->
-{#    <script src="{{ url_for('static',filename='data/courses.csv.js')}}"></script>#}
-    <script src="{{ url_for('static',filename='data/jobs.csv.js')}}"></script>
 
-{#    <script src="{{ url_for('static',filename='data/index_by_sim.js')}}"></script>#}
+{#<!-- Create svg -->#}
+{#<div class="Visuals" id="Visuals">#}
+{#    <!-- Top row -->#}
+{##}
+{#    <!-- Bottom row -->#}
+{##}
+{#</div>#}
 
-    <!-- Load plot fuctions -->
 
-    <script src="{{ url_for('static',filename='vis/rose_plot.js')}}"></script>
-    <script src="{{ url_for('static',filename='vis/tree_path.js')}}"></script>
-    <script src="{{ url_for('static',filename='vis/radar_plot.js')}}"></script>
-    <script src="{{ url_for('static',filename='vis/bar_chart.js')}}"></script>
-    <script src="{{ url_for('static',filename='scripts/vis_bar_ver.js')}}"></script>
+<!-- Load data -->
+<script src="{{ url_for('static',filename='data/jobs.csv.js')}}"></script>
 
+<!-- Load plot fuctions -->
+<script src="{{ url_for('static',filename='vis/rose_plot.js')}}"></script>
+<script src="{{ url_for('static',filename='vis/tree_path.js')}}"></script>
+<script src="{{ url_for('static',filename='vis/radar_plot.js')}}"></script>
+<script src="{{ url_for('static',filename='vis/bar_chart.js')}}"></script>
+<script src="{{ url_for('static',filename='scripts/vis_bar_ver.js')}}"></script>
+<script src="{{ url_for('static',filename='scripts/top_navi_scripts.js')}}"></script>
 </body>
 </html>

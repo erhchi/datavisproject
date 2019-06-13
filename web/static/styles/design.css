@@ -1,0 +1,140 @@
+/*
+https://www.w3schools.com/html/tryit.asp?filename=tryhtml_layout_flexbox
+*/
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Style the header */
+  header {
+    background-color: #000000;
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 65px;
+    text-align: center;
+    font-family: "Inconsolata", sans-serif;
+    font-size: 15px;
+    color: white;
+
+    /* border: solid pink 4px; */
+  }
+
+  .box{
+      border: solid blue;
+      padding: 8px 16px;
+      vertical-align: top;
+  }
+  .centertext{
+    width:100%;
+      text-align: center;
+  }
+  .navcol{
+        /* border: solid green; */
+      width: 25%;
+      float: left;
+      height: 50px;
+      /* transform: translateY(25%); */
+      display : flex;
+    align-items : center;
+    
+  }
+
+  a.nav{
+    color: white;
+    text-decoration: none;
+    }
+a.navover{
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.greybox{
+    background-color: #C8C6C5;
+}
+
+    
+
+  /* Style the navigation menu */
+  nav {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    background: #ccc;
+    padding: 20px;
+  }
+  
+  /* Style the list inside the menu */
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+
+  #selections{
+      border: solid black;
+      height: 100%;
+      width: 15%;
+      float: left;
+  }
+
+
+  .visualizations{
+      border: solid black;
+      float: left;
+  }
+  
+  
+
+  /* Container for flexboxes */
+  section {
+    display: -webkit-flex;
+    display: flex;
+    background-color: #f0f0f5;
+  }
+
+  .visbox {
+      height: 450px;
+      float: left;
+  }
+  
+    /* Style the content */
+  article {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    background-color: #f1f1f1;
+    padding: 10px;
+  }
+  
+  /* Style the footer */
+  footer {
+    background-color: #000000;
+    padding: 10px;
+    text-align: center;
+    color: white;
+  }
+
+  a{
+      color: black;
+      text-decoration: none;
+      /* font-weight: bold; */
+  }
+
+
+  h1{
+      font-size: 18px;
+  }
+  
+  /* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+  @media (max-width: 600px) {
+    section {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+  }
