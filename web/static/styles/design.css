@@ -25,7 +25,7 @@ https://www.w3schools.com/html/tryit.asp?filename=tryhtml_layout_flexbox
   }
 
   .box{
-      border: solid blue;
+      /*border: solid blue;*/
       padding: 8px 16px;
       vertical-align: top;
   }
@@ -77,15 +77,16 @@ a.navover{
 
 
   #selections{
-      border: solid black;
+      /*border: solid black;*/
       height: 100%;
-      width: 15%;
+      width: 25%;
       float: left;
+      padding-left: 5px;
   }
 
 
   .visualizations{
-      border: solid black;
+      /*border: solid black;*/
       float: left;
   }
   
@@ -99,8 +100,31 @@ a.navover{
   }
 
   .visbox {
-      height: 450px;
+      /*border: black solid;*/
+      height: 900px;
+      width: 900px;
       float: left;
+      padding: 25px;
+      /*align-items : center;*/
+  }
+
+  .visboxtitles{
+      /*border: black solid;*/
+      height: 1000px;
+      width: 1800px;
+      float: left;
+      padding: 25px;
+      /*padding-left: 5%;*/
+      align-items : center;
+  }
+
+  #vis1{
+      padding-top: 80px;
+      padding-left: 5%;
+  }
+  #vis2{
+      padding: 50px;
+      padding-bottom:250px;
   }
   
     /* Style the content */
@@ -131,10 +155,15 @@ a.navover{
       font-size: 18px;
   }
   
-  /* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
-  @media (max-width: 600px) {
-    section {
-      -webkit-flex-direction: column;
-      flex-direction: column;
-    }
-  }
+  /* Responsive layout - makes the menu and the content (inside the section) sit on
+  top of each other instead of next to each other */
+  /*@media (max-width: 900px) {*/
+    /*section {*/
+      /*-webkit-flex-direction: column;*/
+      /*flex-direction: column;*/
+    /*}*/
+
+      /*#vis1{order:1; border: none;}*/
+      /*#vis2{order:3}*/
+      /*#vis3{order:2}*/
+  /*}*/

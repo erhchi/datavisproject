@@ -4,6 +4,11 @@ var RP_Vis = function() {
     var newRP = {
             rose_plot: function(svg, data, color_scheme) {
 
+                $(".VisualR1N2").find("h3").remove();
+                $(".VisualR1N2").find("h2").remove();
+                $(".VisualR1N2").prepend("<h2 style=\"text-align: center\">Relevance of Selected Courses to General Job Categories</h2>")
+                $(".VisualR1N2").append("<h3 style=\"text-align: center\">Click a Bar to View Relevance to Category Sub-Titles</h3>");
+
                 svg.selectAll("g").remove();
 
                 // set the dimensions and margins of the graph

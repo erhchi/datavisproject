@@ -71,7 +71,7 @@
 }
 
 .list{
-	width: 300px;
+	width: 450px;
 	height: 300px;
 	border: 2px solid black;
 	list-style-type: none;
@@ -91,24 +91,25 @@
 {
 	/*border: solid blue;*/
 	/*display: flex;*/
-	float: left;
+	/*float: left;*/
 	/*margin-left: 50px;*/
-	margin-top:0px;
+	/*margin-top:0px;*/
 	/*position: absolute;*/
 }
 
 .VisualR1N1{
-	/*border: solid brown;*/
-	float: left;
+	/
+	/*float: left;*/
 	/*width: 700px;*/
-	height: 500px;
+	/*height: 500px;*/
+	/*width: 100%*/
 }
 
 .VisualR1N2{
 	/*border: solid brown;*/
-	float: right;
-	width: 700px;
-	height: 500px;
+	/*float: right;*/
+	/*width: 700px;*/
+	/*height: 500px;*/
 }
 
 .VisualsRow2

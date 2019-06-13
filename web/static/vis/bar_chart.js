@@ -31,7 +31,7 @@ var BC_Vis = function() {
                 .attr("x", 100 + (+svg.attr("width") / 2))             
                 .attr("y", 0 - (margin.top / 2))
                 .attr("text-anchor", "middle")  
-                .style("font-size", "40px") 
+                .style("font-size", "30px")
                 .style("text-decoration", "underline")  
                 .text(title);
             

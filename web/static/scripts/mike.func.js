@@ -100,7 +100,7 @@ function LoadConcentrationCourses(data){
         .enter()
         .append("option")
         .attr("value", function(d) { return d.index; } )
-        .attr("draggable", "true")
+        // .attr("draggable", "true")
         .text( function(d) { return d.dept + d.cno + " - " + d.name; } );
 }
 
@@ -118,8 +118,8 @@ function AddCourseToPool(courseData){
     if (flag) {
         d3.select("#list").append("li")
             .attr("value", courseIndex)
-            .attr("draggable", "true")
-            .attr("ondragstart", "dragBeginHandler(event)")
+            // .attr("draggable", "true")
+            // .attr("ondragstart", "dragBeginHandler(event)")
             .text(courseData[courseIndex].dept + courseData[courseIndex].cno + " - " + courseData[courseIndex].name)
             .style("font-family", "sans-serif");
         selectedCoursePool.push(courseIndex);

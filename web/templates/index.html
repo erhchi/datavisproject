@@ -24,9 +24,9 @@
                 <div class="navcol"><div class="centertext"><a class="nav" href="/">HOME</a></div></div>
                 <!-- <div class="navcol"><div class="navitem">HOME</div></div> -->
                 <!-- <div class="navcol"><br/>HOME</div> -->
-                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis1">VIS 1 - Radar Plot</a></div></div>
-                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis2">VIS 2 - Rose Plot</a></div></div>
-                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis3">VIS 3 - Bar Chart</a></div></div>
+                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis1">Course Concentrations</a></div></div>
+                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis2">Job Category</a></div></div>
+                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis3">Job Titles / Course Relevancy</a></div></div>
             <!-- </div> -->
 
         </header>
@@ -69,7 +69,7 @@
 
                         <!-- Clear Selected Pool Button -->
                         <button id="clearSelectionButton" onclick="ClearSelections(selectedCoursePool)">Clear</button>
-
+                        <h4 style="text-align: center">Click a Course to Remove It, Or Click Button to Remove All</h4>
                     </div>
 
                 </div>
@@ -79,27 +79,25 @@
 
                 <section id="vis1" class="visbox">
 {#                    <div class="VisualsRow1">#}
-                        <div class="VisualR1N1"><svg id="d3_academic" height="500" width="600" ></svg></div>
-
+                        <div class="VisualR1N1">
+                            <br/><br/>
+                                <svg id="d3_academic" height="500" width="600" ></svg>
+                        </div>
 {#                    </div>#}
                 </section>
 
                 <section id="vis2" class="visbox">
-                        <div class="VisualR1N2"><svg id="d3_career" height="500" width="900"></svg></div>
+                        <div class="VisualR1N2">
+                            <svg id="d3_career" height="700" width="900"></svg>
+                        </div>
                 </section>
 
-                <br/>
-                <br/>
-
-                <section id="vis3" class="visbox">
+                <section id="vis3" class="visboxtitles">
                     <div class="VisualsRow2">
-                        <svg id="d3_bar" width="960" height="700"></svg>
+                        <svg id="d3_bar" height="700" width="960" ></svg>
                     </div>
-                    <br/>
-                    <a href="#top">top</a>
                 </section>
-                <br/>
-                <br/>
+
             </div>
 
             <br/>

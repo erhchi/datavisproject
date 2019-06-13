@@ -23,6 +23,8 @@ function test(){
     // if no selection
     if (selectedCoursePool.length === 0) {
         console.log("Selected list is empty.");
+        $(".visualizations").find("h2").remove();
+        $(".visualizations").find("h3").remove();
         svg_career.selectAll("g").remove();
         svg_academic.selectAll("g").remove();
         svg_bar.selectAll("g").remove();

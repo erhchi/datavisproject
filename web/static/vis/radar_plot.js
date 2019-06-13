@@ -5,6 +5,11 @@ var radar_Vis = function() {
 
         svg.selectAll("g").remove();
 
+        $(".VisualR1N1").find("h3").remove();
+        $(".VisualR1N1").find("h2").remove();
+        $(".VisualR1N1").prepend("<h2 style=\"text-align: center\">Number of Courses By Concentration</h2>");
+        $(".VisualR1N1").append("<h3 style=\"text-align: center; margin-top:150px;\">Click a Dot to Show How That Concentration Effects Relevancy (In Bar Chart)</h3>")
+
         // console.log(d)
 
         var cfg = {
