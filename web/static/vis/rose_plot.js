@@ -6,8 +6,8 @@ var RP_Vis = function() {
 
                 $(".VisualR1N2").find("h3").remove();
                 $(".VisualR1N2").find("h2").remove();
-                $(".VisualR1N2").prepend("<h2 style=\"text-align: center\">Relevance of Selected Courses to General Job Categories</h2>")
-                $(".VisualR1N2").append("<h3 style=\"text-align: center\">Click a Bar to View Relevance to Category Sub-Titles</h3>");
+                $(".VisualR1N2").prepend("<h3 style=\"text-align: center\">Click a Bar to View Relevance to Category Sub-Titles</h3>");
+                $(".VisualR1N2").append("<h2 style=\"text-align: center\">Relevance of Selected Courses to General Job Categories</h2>")
 
                 svg.selectAll("g").remove();
 
@@ -48,6 +48,9 @@ var RP_Vis = function() {
                     .attr("fill", function(d) { return color(d.label);})
                     .on("click", function(d) { newRP.dispatch.call("selected_by_rose",{},
                                                                     [d.label, color(d.label)]); })
+                    .on("mouseover", function(d){d3.select(this).style("cursor", "pointer")})
+                    .on("mouseout", function(d){d3.select(this).style("cursor", "")})
+
                     .attr("d", d3.arc()     // imagine your doing a part of a donut plot
                         .innerRadius(innerRadius)
                         .outerRadius(function(d) { return y(d['value']); })

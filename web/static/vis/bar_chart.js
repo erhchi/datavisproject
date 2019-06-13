@@ -70,6 +70,12 @@ var BC_Vis = function() {
                 .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x));
 
+            svg.append("text")
+            .attr("x", 158)
+            .attr("y", height + 30)
+            .text("Percentage Relevancy of Selected Courses")
+            .style("font-size", "14px");
+
             // add the y Axis
             svg.append("g")
                 .call(d3.axisLeft(y));            

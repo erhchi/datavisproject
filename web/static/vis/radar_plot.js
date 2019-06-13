@@ -7,8 +7,8 @@ var radar_Vis = function() {
 
         $(".VisualR1N1").find("h3").remove();
         $(".VisualR1N1").find("h2").remove();
-        $(".VisualR1N1").prepend("<h2 style=\"text-align: center\">Number of Courses By Concentration</h2>");
-        $(".VisualR1N1").append("<h3 style=\"text-align: center; margin-top:150px;\">Click a Dot to Show How That Concentration Effects Relevancy (In Bar Chart)</h3>")
+        $(".VisualR1N1").prepend("<h3 style=\"text-align: center\">Click a Dot to Show How That Concentration Effects Relevancy (In Bar Chart)</h3>")
+        $(".VisualR1N1").append("<h2 style=\"text-align: center; margin-top:150px;\">Number of Courses By Concentration</h2>");
 
         // console.log(d)
 
@@ -187,7 +187,8 @@ var radar_Vis = function() {
           .on('mouseover', function (d){
                 newX =  parseFloat(d3.select(this).attr('cx')) - 10;
                 newY =  parseFloat(d3.select(this).attr('cy')) - 5;
-    
+                d3.select(this).style("cursor", "pointer")
+
                 tooltip
                   .attr('x', newX)
                   .attr('y', newY)
@@ -210,6 +211,7 @@ var radar_Vis = function() {
                 g.selectAll("polygon")
                   .transition(200)
                   .style("fill-opacity", cfg.opacityArea);
+                d3.select(this).style("cursor", "")
                 })
           .append("svg:title")
           .text(function(d){return Math.max(d.value, 0)});

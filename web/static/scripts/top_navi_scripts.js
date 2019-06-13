@@ -1,6 +1,5 @@
 
 $("div.navcol").mouseover(function(){
-    console.log("xxx")
 $(this).toggleClass("greybox")
 $(this).find("a").removeClass("nav")
 $(this).find("a").addClass("navover")

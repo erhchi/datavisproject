@@ -118,9 +118,9 @@ function AddCourseToPool(courseData){
     if (flag) {
         d3.select("#list").append("li")
             .attr("value", courseIndex)
-            // .attr("draggable", "true")
-            // .attr("ondragstart", "dragBeginHandler(event)")
-            .text(courseData[courseIndex].dept + courseData[courseIndex].cno + " - " + courseData[courseIndex].name)
+             .on("mouseover", function(d){d3.select(this).style("cursor", "pointer")})
+            .on("mouseout", function(d){d3.select(this).style("cursor", "")})
+           .text(courseData[courseIndex].dept + courseData[courseIndex].cno + " - " + courseData[courseIndex].name)
             .style("font-family", "sans-serif");
         selectedCoursePool.push(courseIndex);
     } else {
