@@ -4,7 +4,7 @@ var BC_Vis = function() {
     var newBC = {
         bar_cahrt: function(svg, data, title, color) {
             // set the dimensions and margins of the graph
-            var margin = {top: 60, right: 20, bottom: 30, left: 350},
+            var margin = {top: 60, right: 20, bottom: 30, left: 450},
                 width = +svg.attr("width") - margin.left - margin.right,
                 height = +svg.attr("height") - margin.top - margin.bottom;
 
@@ -78,6 +78,7 @@ var BC_Vis = function() {
 
             // add the y Axis
             svg.append("g")
+                .style("font-size", "14px")
                 .call(d3.axisLeft(y));            
         }
     }
