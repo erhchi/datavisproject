@@ -126,6 +126,12 @@ a.navover{
       padding: 50px;
       padding-bottom:250px;
   }
+
+  .view{
+      font-family: Arial;
+      font-size: 14px;
+      width: 400px;
+  }
   
     /* Style the content */
   article {

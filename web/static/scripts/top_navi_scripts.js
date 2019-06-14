@@ -10,3 +10,7 @@ $(this).removeClass("greybox")
 $(this).find("a").removeClass("navover")
 $(this).find("a").addClass("nav")
 })
+
+$("#view").click(function(){
+    $(this).hide();
+})
