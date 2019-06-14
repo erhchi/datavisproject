@@ -6,7 +6,7 @@ var RP_Vis = function() {
 
                 $(".VisualR1N2").find("h3").remove();
                 $(".VisualR1N2").find("h2").remove();
-                $(".VisualR1N2").prepend("<h3 style=\"text-align: center\">First, click a Bar to View Relevance to Category Sub-Titles</h3>");
+                $(".VisualR1N2").prepend("<h2 style=\"text-align: center\">Step 3: Click a leaf to view course relevance to job category sub-titles</h2>");
                 $(".VisualR1N2").append("<h2 style=\"text-align: center\">Relevance of Selected Courses to General Job Categories</h2>")
 
                 svg.selectAll("g").remove();

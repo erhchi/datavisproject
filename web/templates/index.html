@@ -24,8 +24,8 @@
                 <div class="navcol"><div class="centertext"><a class="nav" href="/">HOME</a></div></div>
                 <!-- <div class="navcol"><div class="navitem">HOME</div></div> -->
                 <!-- <div class="navcol"><br/>HOME</div> -->
-                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis1">Course Concentrations</a></div></div>
-                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis2">Job Category</a></div></div>
+                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis1">Job Category</a></div></div>
+                <div class="navcol"><div class="centertext"><a class="nav"  href="#vis2">Course Concentrations</a></div></div>
                 <div class="navcol"><div class="centertext"><a class="nav"  href="#vis3">Job Titles / Course Relevancy</a></div></div>
             <!-- </div> -->
 
@@ -38,7 +38,7 @@
                     <!-- Concentration Menu -->
                     <div class="ConcentrationMenu">
 
-                        <h2/>Select Concentration</h1>
+                        <h2/>Step 1: Select Concentration</h1>
 
                         <div id="concentrationSelect" onchange="LoadConcentrationCourses(courseData)">
                             <select id="concDrop"></select>
@@ -49,7 +49,7 @@
                     <!-- Select Course Menu -->
                     <div class="CourseMenu">
 
-                        <h2>Select Course</h2>
+                        <h2>Step 2: Select Course(s)</h2>
 
                         <div id="courseSelect" onchange="AddCourseToPool(courseData)">
                             <select id="courseDrop"></select>
@@ -60,7 +60,7 @@
                     <!-- Selected Course Display -->
                     <div class="SelectedDisplay" >
 
-                        <h2 style="font-family:sans-serif">Selected Courses</h2>
+                        <h2 style="font-family:sans-serif">Selected Course(s)</h2>
 
                         <ul class="list" id="list" class="SelectedDisplayList"
                             ondragend="dragEndHandler(event)"
@@ -69,7 +69,7 @@
 
                         <!-- Clear Selected Pool Button -->
                         <button id="clearSelectionButton" onclick="ClearSelections(selectedCoursePool)">Clear</button>
-                        <h4 style="text-align: center">Click a Course to Remove It, Or Click Button to Remove All</h4>
+                        <h4 style="text-align: center">Click a Course to Remove It, Or Click Clear to Remove All</h4>
                     </div>
 
                 </div>
@@ -87,7 +87,7 @@
 {#                    <div class="VisualsRow1">#}
                         <div class="VisualR1N1">
                             <br/><br/>
-                                <svg id="d3_academic" height="500" width="600" ></svg>
+                                <svg id="d3_academic" height="680" width="600" ></svg>
                         </div>
 {#                    </div>#}
                 </section>

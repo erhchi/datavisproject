@@ -7,8 +7,8 @@ var radar_Vis = function() {
 
         $(".VisualR1N1").find("h3").remove();
         $(".VisualR1N1").find("h2").remove();
-        $(".VisualR1N1").prepend("<h3 style=\"text-align: center\">Click a Dot to Show How That Concentration Effects Relevancy (In Bar Chart)</h3>")
-        $(".VisualR1N1").append("<h2 style=\"text-align: center; margin-top:150px;\">Number of Courses By Concentration</h2>");
+        $(".VisualR1N1").prepend("<h2 style=\"text-align: center\">Step 4: Click a dot to show how that concentration effects relevancy</h2>")
+        $(".VisualR1N1").append("<h2 style=\"text-align: center;\">Number of Courses By Concentration</h2>");
 
         // console.log(d)
 

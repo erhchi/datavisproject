@@ -53,6 +53,7 @@
 	float: left;
 	/*position: absolute;*/
 	margin-top: 0px;
+	width: 400px;
 }
 
 .CourseMenu
@@ -61,6 +62,7 @@
 	float: left;
 	/*position: absolute;*/
 	margin-top: 150px;
+	width: 400px;
 }
 
 .SelectedDisplay

@@ -14,7 +14,7 @@ $(function(){
 
     $(window).scroll(function(){
         var y = $(this).scrollTop();
-        console.log(y)
+        // console.log(y)
 
     if($(window).scrollTop()> offset.top){
         //console.log(">")
